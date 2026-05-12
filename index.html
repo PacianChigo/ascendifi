@@ -3,7 +3,269 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AscendFi — Ascend Yo<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>AscendFi — Ascend Your Wealth</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;800&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --gold-dim: #7A5F24;
+    --bg: #050608;
+    --bg2: #090B0F;
+    --bg3: #0E1118;
+    --surface: #111520;
+    --surface2: #171D2E;
+    --border: rgba(201,168,76,0.18);
+    --text: #EAE6D8;
+    --muted: #6B7280;
+    --green: #22C55E;
+    --red: #EF4444;
+    --blue: #3B82F6;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: 'DM Mono', monospace; font-size: 14px; overflow-x: hidden; cursor: default; }
+
+  /* Animated Background Elements */
+  .grid-bg { position: fixed; inset: 0; z-index: 0; background-image: linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; }
+  
+  /* Navigation */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 70px; background: rgba(5,6,8,0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+  .logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 22px; letter-spacing: 0.04em; display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); }
+  .logo-icon { width: 32px; height: 32px; background: linear-gradient(135deg, var(--gold), var(--gold-light)); clip-path: polygon(50% 0%, 100% 100%, 0% 100%); }
+
+  /* Buttons */
+  .btn { font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; padding: 10px 24px; border-radius: 2px; cursor: pointer; border: none; transition: all 0.2s; text-decoration: none; display: inline-block; }
+  .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text); }
+  .btn-gold { background: linear-gradient(135deg, var(--gold), var(--gold-light)); color: #0A0800; font-weight: 600; }
+
+  /* Hero Section */
+  .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 120px 24px; position: relative; z-index: 1; }
+  .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(56px, 9vw, 130px); font-weight: 300; line-height: 0.92; margin-bottom: 32px; }
+  .hero h1 em { font-style: italic; color: var(--gold); }
+
+  /* AUTH MODAL */
+  .modal-overlay { position: fixed; inset: 0; z-index: 200; background: rgba(5,6,8,0.9); backdrop-filter: blur(12px); display: none; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s; }
+  .modal-overlay.open { display: flex; opacity: 1; }
+  .modal { background: var(--surface); border: 1px solid var(--border); padding: 48px; width: 100%; max-width: 440px; position: relative; }
+  .modal-close { position: absolute; top: 16px; right: 20px; background: none; border: none; color: var(--muted); font-size: 22px; cursor: pointer; }
+  .modal-tabs { display: flex; margin-bottom: 32px; border: 1px solid var(--border); }
+  .modal-tab { flex: 1; padding: 10px; text-align: center; font-size: 11px; cursor: pointer; color: var(--muted); background: transparent; border: none; font-family: 'DM Mono', monospace; text-transform: uppercase; }
+  .modal-tab.active { background: var(--gold); color: #0A0800; font-weight: 600; }
+  .field { margin-bottom: 20px; }
+  .field label { display: block; font-size: 10px; color: var(--gold); margin-bottom: 8px; text-transform: uppercase; }
+  .field input { width: 100%; background: var(--bg3); border: 1px solid var(--border); color: var(--text); padding: 12px 16px; outline: none; }
+  .submit-btn { width: 100%; padding: 14px; background: linear-gradient(135deg, var(--gold), var(--gold-light)); color: #0A0800; border: none; cursor: pointer; font-family: 'DM Mono', monospace; font-weight: 600; text-transform: uppercase; }
+
+  /* DASHBOARD INTERFACE */
+  .dash-page { display: none; position: fixed; inset: 0; z-index: 150; background: var(--bg); overflow-y: auto; }
+  .dash-page.active { display: block; }
+  .dash-layout { display: grid; grid-template-columns: 260px 1fr; min-height: 100vh; }
+  .dash-sidebar { background: var(--bg2); border-right: 1px solid var(--border); }
+  .dash-nav-item { display: flex; align-items: center; gap: 12px; padding: 16px 24px; font-size: 12px; color: var(--muted); cursor: pointer; transition: 0.2s; border-left: 3px solid transparent; }
+  .dash-nav-item.active { color: var(--gold); background: rgba(201,168,76,0.06); border-left-color: var(--gold); }
+  .dash-content { padding: 40px; }
+
+  /* Tier Cards */
+  .tier-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 30px; }
+  .tier-card { background: var(--surface); border: 1px solid var(--border); padding: 32px 24px; text-align: center; transition: 0.3s; }
+  .tier-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+  .tier-card h3 { font-family: 'Syne', sans-serif; font-size: 14px; color: var(--gold); margin-bottom: 15px; }
+  .tier-card .roi { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 600; }
+
+  /* Wallet Cards */
+  .wallet-card { background: var(--surface); border: 1px solid var(--border); padding: 24px; margin-bottom: 16px; }
+  .wallet-address { font-family: 'DM Mono', monospace; font-size: 11px; background: var(--bg3); padding: 12px; margin-top: 10px; display: flex; justify-content: space-between; align-items: center; }
+
+  .balance-box { background: var(--bg3); border: 1px solid var(--border); padding: 20px; margin: 24px; }
+</style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+
+<!-- Landing Nav -->
+<nav id="landingNav">
+  <a href="#" class="logo"><span class="logo-icon"></span>AscendFi</a>
+  <div class="nav-actions">
+    <button class="btn btn-outline" onclick="openModal('login')">Login</button>
+    <button class="btn btn-gold" onclick="openModal('register')">Join Now</button>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="heroSection">
+  <h1>Ascend Your <em>Wealth</em></h1>
+  <p style="color:var(--muted); max-width:500px; margin-bottom:40px;">The world's most sophisticated cryptocurrency management platform for the elite hacker community.</p>
+  <button class="btn btn-gold" onclick="openModal('register')">Begin Your Ascent</button>
+</section>
+
+<!-- Auth Modal -->
+<div class="modal-overlay" id="authModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <h2 id="modalTitle" style="font-family:'Cormorant Garamond'; font-size:32px; margin-bottom:8px;">Welcome</h2>
+    <p id="modalDesc" style="font-size:12px; color:var(--muted); margin-bottom:24px;">Secure access to your professional portfolio.</p>
+    
+    <div class="modal-tabs" id="authTabs">
+      <button class="modal-tab active" id="loginTabBtn" onclick="switchTab('login')">Login</button>
+      <button class="modal-tab" id="registerTabBtn" onclick="switchTab('register')">Register</button>
+    </div>
+
+    <!-- Login -->
+    <div id="loginForm">
+      <div class="field"><label>Email</label><input type="email" id="lEmail"></div>
+      <div class="field"><label>Password</label><input type="password" id="lPass"></div>
+      <div style="margin-bottom:20px; font-size:11px; display:flex; justify-content:space-between; align-items:center;">
+        <label><input type="checkbox"> Remember Password</label>
+        <a href="#" style="color:var(--gold); text-decoration:none;">Forgot?</a>
+      </div>
+      <button class="submit-btn" onclick="mockAccess()">Login →</button>
+      <div style="text-align:center; margin:20px 0; color:var(--muted); font-size:10px;">OR</div>
+      <button class="btn btn-outline" style="width:100%;" onclick="mockAccess()">Continue with Google Account</button>
+    </div>
+
+    <!-- Register -->
+    <div id="registerForm" style="display:none;">
+      <div class="field"><label>Full Name</label><input type="text" id="rName"></div>
+      <div class="field"><label>Email Address</label><input type="email" id="rEmail"></div>
+      <div class="field"><label>Password</label><input type="password" id="rPass"></div>
+      <button class="submit-btn" onclick="showOTP()">Send Confirmation Code</button>
+    </div>
+
+    <!-- OTP -->
+    <div id="otpForm" style="display:none; text-align:center;">
+      <p style="margin-bottom:20px; font-size:12px;">Verification code sent to your email.</p>
+      <div class="field"><input type="text" placeholder="0 0 0 0 0 0" style="text-align:center; font-size:20px; letter-spacing:10px;"></div>
+      <button class="submit-btn" onclick="mockAccess()">Verify & Register</button>
+    </div>
+  </div>
+</div>
+
+<!-- Dashboard -->
+<div class="dash-page" id="dashPage">
+  <div class="dash-layout">
+    <aside class="dash-sidebar">
+      <div style="padding:24px;"><a href="#" class="logo"><span class="logo-icon"></span>AscendFi</a></div>
+      
+      <!-- Wallet Switcher -->
+      <div class="balance-box">
+        <label style="font-size:9px; color:var(--gold);">WALLET TYPE</label>
+        <select id="walletType" onchange="switchWallet()" style="background:none; border:none; color:var(--text); font-family:inherit; font-weight:bold; cursor:pointer; width:100%; outline:none;">
+          <option value="main">Main Wallet (Real)</option>
+          <option value="demo">Demo Wallet (Training)</option>
+        </select>
+        <div id="mainBalance" style="font-size:24px; font-weight:bold; margin-top:10px; color:var(--gold);">$12,480.00</div>
+      </div>
+
+      <nav>
+        <div class="dash-nav-item active" onclick="showSect('overview')">📊 Overview</div>
+        <div class="dash-nav-item" onclick="showSect('invest')">💎 Investment Tiers</div>
+        <div class="dash-nav-item" onclick="showSect('deposit')">🏛️ Deposit Assets</div>
+        <div class="dash-nav-item" onclick="location.reload()">🔒 Secure Logout</div>
+      </nav>
+    </aside>
+
+    <main class="dash-content">
+      <div id="sect-overview">
+        <h2 style="font-family:'Cormorant Garamond'; font-size:36px;">Account Overview</h2>
+        <p style="color:var(--muted); margin-top:10px;">Welcome back, Investor. Your nodes are active.</p>
+      </div>
+
+      <!-- Investment Tiers -->
+      <div id="sect-invest" style="display:none;">
+        <h2 style="font-family:'Cormorant Garamond'; font-size:36px; margin-bottom:24px;">Growth Tiers</h2>
+        <div class="tier-grid">
+          <div class="tier-card"><h3>Level 1</h3><div class="roi">$100 - $999</div><p style="font-size:10px; margin:15px 0; color:var(--muted);">1.2% Daily ROI</p><button class="btn btn-gold" style="width:100%" onclick="showSect('deposit')">Invest</button></div>
+          <div class="tier-card"><h3>Level 2</h3><div class="roi">$1,000 - $4,999</div><p style="font-size:10px; margin:15px 0; color:var(--muted);">2.5% Daily ROI</p><button class="btn btn-outline" style="width:100%" onclick="showSect('deposit')">Invest</button></div>
+          <div class="tier-card"><h3>Level 3</h3><div class="roi">$5,000 - $9,999</div><p style="font-size:10px; margin:15px 0; color:var(--muted);">4.0% Daily ROI</p><button class="btn btn-outline" style="width:100%" onclick="showSect('deposit')">Invest</button></div>
+          <div class="tier-card"><h3>Level 4</h3><div class="roi">$10,000 - $49,999</div><p style="font-size:10px; margin:15px 0; color:var(--muted);">6.5% Daily ROI</p><button class="btn btn-outline" style="width:100%" onclick="showSect('deposit')">Invest</button></div>
+          <div class="tier-card"><h3>Level 5</h3><div class="roi">$50,000+</div><p style="font-size:10px; margin:15px 0; color:var(--muted);">10% Daily ROI</p><button class="btn btn-outline" style="width:100%" onclick="showSect('deposit')">Invest</button></div>
+        </div>
+      </div>
+
+      <!-- Deposit -->
+      <div id="sect-deposit" style="display:none;">
+        <h2 style="font-family:'Cormorant Garamond'; font-size:36px; margin-bottom:24px;">Deposit Nodes</h2>
+        <div class="wallet-card">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span>BITCOIN (BTC)</span><span style="color:var(--gold); font-size:10px;">Recommended</span>
+          </div>
+          <div class="wallet-address">bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh <span style="cursor:pointer">📋</span></div>
+        </div>
+        <div class="wallet-card">
+          <span>SOLANA (SOL)</span>
+          <div class="wallet-address">HN7cABqL3zROB83E822Fq2C485f2rG8f6d528f8f <span style="cursor:pointer">📋</span></div>
+        </div>
+        <div class="wallet-card">
+          <span>ETHEREUM (ETH)</span>
+          <div class="wallet-address">0x71C7656EC7ab88b098defB751B7401B5f6d8976F <span style="cursor:pointer">📋</span></div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<script>
+  function openModal(type) {
+    document.getElementById('authModal').classList.add('open');
+    switchTab(type);
+  }
+  function closeModal() { document.getElementById('authModal').classList.remove('open'); }
+
+  function switchTab(type) {
+    const isLogin = type === 'login';
+    document.getElementById('loginForm').style.display = isLogin ? 'block' : 'none';
+    document.getElementById('registerForm').style.display = isLogin ? 'none' : 'block';
+    document.getElementById('otpForm').style.display = 'none';
+    document.getElementById('loginTabBtn').classList.toggle('active', isLogin);
+    document.getElementById('registerTabBtn').classList.toggle('active', !isLogin);
+  }
+
+  function showOTP() {
+    document.getElementById('registerForm').style.display = 'none';
+    document.getElementById('authTabs').style.display = 'none';
+    document.getElementById('otpForm').style.display = 'block';
+    document.getElementById('modalTitle').innerText = "Verify Code";
+  }
+
+  function mockAccess() {
+    closeModal();
+    document.getElementById('landingNav').style.display = 'none';
+    document.getElementById('heroSection').style.display = 'none';
+    document.getElementById('dashPage').classList.add('active');
+  }
+
+  function switchWallet() {
+    const type = document.getElementById('walletType').value;
+    const balance = document.getElementById('mainBalance');
+    if(type === 'demo') {
+      balance.innerText = "$50,000.00";
+      balance.style.color = "var(--blue)";
+    } else {
+      balance.innerText = "$12,480.00";
+      balance.style.color = "var(--gold)";
+    }
+  }
+
+  function showSect(name) {
+    ['overview', 'invest', 'deposit'].forEach(s => {
+      document.getElementById('sect-' + s).style.display = (s === name) ? 'block' : 'none';
+    });
+    document.querySelectorAll('.dash-nav-item').forEach(i => {
+      i.classList.remove('active');
+      if(i.innerText.toLowerCase().includes(name)) i.classList.add('active');
+    });
+  }
+</script>
+</body>
+</html>ur Wealth</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;800&display=swap" rel="stylesheet"/>
 <style>
   :root {
