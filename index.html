@@ -29,7 +29,6 @@ html{scroll-behavior:smooth;}
 body{background:var(--bg);color:var(--text);font-family:'DM Mono',monospace;font-size:14px;overflow-x:hidden;}
 ::-webkit-scrollbar{width:3px;} ::-webkit-scrollbar-track{background:var(--bg2);} ::-webkit-scrollbar-thumb{background:var(--gold-dim);}
 
-/* ── NOISE + GRID ── */
 body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
   opacity:0.018;}
@@ -38,7 +37,6 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
   background-size:72px 72px;animation:gDrift 30s linear infinite;}
 @keyframes gDrift{0%{background-position:0 0;}100%{background-position:72px 72px;}}
 
-/* Orbs */
 .orb{position:fixed;border-radius:50%;filter:blur(130px);pointer-events:none;z-index:0;}
 .o1{width:800px;height:800px;top:-350px;right:-250px;background:radial-gradient(circle,rgba(201,168,76,0.08),transparent 70%);animation:fo 16s ease-in-out infinite alternate;}
 .o2{width:500px;height:500px;bottom:-100px;left:-150px;background:radial-gradient(circle,rgba(59,130,246,0.05),transparent 70%);animation:fo 20s ease-in-out infinite alternate-reverse;}
@@ -46,7 +44,6 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 
 .z1{position:relative;z-index:1;}
 
-/* ── NAVIGATION ── */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;height:66px;display:flex;align-items:center;justify-content:space-between;padding:0 52px;background:rgba(5,6,8,0.82);backdrop-filter:blur(28px);border-bottom:1px solid var(--border);}
 .logo{display:flex;align-items:center;gap:9px;font-family:'Syne',sans-serif;font-weight:800;font-size:20px;letter-spacing:.06em;color:var(--text);text-decoration:none;}
 .logo-mark{width:28px;height:28px;background:linear-gradient(135deg,var(--gold),var(--gold-light));clip-path:polygon(50% 0%,100% 100%,0% 100%);flex-shrink:0;animation:pm 3s ease-in-out infinite;}
@@ -65,11 +62,8 @@ nav ul a:hover{color:var(--gold);}
 .btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#080500;font-weight:600;}
 .btn-gold:hover{transform:translateY(-1px);box-shadow:0 6px 28px rgba(201,168,76,.3);}
 
-/* ── HERO ── */
 .hero{min-height:100vh;display:grid;grid-template-columns:1fr 420px;gap:0;align-items:center;padding:100px 52px 60px;position:relative;overflow:hidden;}
 .hero::before{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold-dim),transparent);}
-
-/* Left col */
 .hero-left{padding-right:48px;}
 .hero-eyebrow{display:inline-flex;align-items:center;gap:10px;margin-bottom:36px;animation:fu .8s ease both;}
 .hero-eyebrow-line{width:32px;height:1px;background:var(--gold);}
@@ -80,15 +74,12 @@ nav ul a:hover{color:var(--gold);}
 @keyframes shimmer{0%{background-position:0%;}100%{background-position:200%;}}
 .hero-desc{max-width:480px;color:var(--text2);font-size:13px;line-height:1.85;margin-bottom:40px;animation:fu 1s ease .3s both;}
 .hero-cta{display:flex;gap:12px;flex-wrap:wrap;animation:fu 1s ease .45s both;margin-bottom:52px;}
-/* Mini live stats row */
 .hero-stats{display:flex;gap:0;border:1px solid var(--border);animation:fu 1s ease .6s both;}
 .hs{padding:16px 24px;border-right:1px solid var(--border);flex:1;}
 .hs:last-child{border-right:none;}
 .hs-lbl{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
 .hs-val{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--gold);}
 .hs-chg{font-size:10px;color:var(--green);margin-top:2px;}
-
-/* Right col — live data panel */
 .hero-panel{background:var(--surface);border:1px solid var(--border);animation:fu 1s ease .35s both;position:relative;overflow:hidden;}
 .hero-panel::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
 .hp-head{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
@@ -109,20 +100,16 @@ nav ul a:hover{color:var(--gold);}
 .pr-price{font-size:13px;font-weight:500;}
 .pr-chg{font-size:10px;margin-top:2px;}
 .pr-bar{height:2px;border-radius:1px;margin-top:3px;min-width:40px;}
-
 @keyframes fu{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
 
-/* ── TICKER ── */
 .ticker-wrap{width:100%;overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--bg2);padding:10px 0;}
 .ticker{display:flex;gap:52px;animation:tickroll 40s linear infinite;width:max-content;white-space:nowrap;}
 .ti{display:flex;align-items:center;gap:10px;font-size:11px;}
 .ti .sym{color:var(--gold);font-weight:500;letter-spacing:.06em;}
 .up{color:var(--green);}
 .dn{color:var(--red);}
-.ti-sep{color:var(--muted);}
 @keyframes tickroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
 
-/* ── STATS BAND ── */
 .stats-band{display:grid;grid-template-columns:repeat(4,1fr);background:var(--border);gap:1px;border:1px solid var(--border);}
 .sb{background:var(--bg2);padding:36px 28px;text-align:center;position:relative;overflow:hidden;transition:background .3s;}
 .sb:hover{background:var(--surface);}
@@ -131,12 +118,10 @@ nav ul a:hover{color:var(--gold);}
 .sb-num{font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:600;color:var(--gold);line-height:1;margin-bottom:6px;}
 .sb-lbl{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);}
 
-/* ── SECTIONS ── */
 section.lp{padding:100px 52px;position:relative;z-index:1;}
 .sec-tag{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:14px;}
 .sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(38px,5vw,68px);font-weight:300;line-height:1.06;margin-bottom:20px;}
 
-/* ── ABOUT / INVESTMENT LEVELS ── */
 .about-hero{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;margin-bottom:80px;}
 .about-text p{color:var(--text2);font-size:13px;line-height:1.9;margin-bottom:16px;}
 .about-text p:last-child{margin-bottom:0;}
@@ -146,7 +131,6 @@ section.lp{padding:100px 52px;position:relative;z-index:1;}
 .trust-title{font-family:'Syne',sans-serif;font-size:12px;font-weight:600;margin-bottom:4px;}
 .trust-desc{font-size:11px;color:var(--muted);line-height:1.6;}
 
-/* Returns highlight box */
 .returns-box{background:var(--surface);border:1px solid var(--border);padding:32px;position:relative;overflow:hidden;}
 .returns-box::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
 .returns-box h3{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:400;margin-bottom:6px;}
@@ -157,11 +141,8 @@ section.lp{padding:100px 52px;position:relative;z-index:1;}
 .roi-cell .rc-val{font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--gold);}
 .roi-cell .rc-sub{font-size:10px;color:var(--text2);margin-top:2px;}
 
-/* ── LEVELS SECTION ── */
 .levels-intro{max-width:680px;margin-bottom:60px;}
 .levels-intro p{color:var(--text2);font-size:13px;line-height:1.85;margin-top:16px;}
-
-/* Level cards — horizontal layout */
 .levels-table{display:flex;flex-direction:column;gap:1px;background:var(--border);}
 .level-row{background:var(--surface);display:grid;grid-template-columns:200px 80px 1fr 1fr 1fr 160px;align-items:center;gap:0;transition:background .25s;cursor:default;position:relative;overflow:hidden;}
 .level-row::before{content:'';position:absolute;left:0;top:0;bottom:0;width:0;background:var(--gold);transition:width .3s;}
@@ -172,8 +153,6 @@ section.lp{padding:100px 52px;position:relative;z-index:1;}
 .lr-cell{padding:20px 24px;border-right:1px solid var(--border);}
 .lr-cell:last-child{border-right:none;}
 .lr-head-lbl{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);}
-
-/* Level name cell */
 .lv-name{display:flex;flex-direction:column;gap:4px;}
 .lv-badge{display:inline-flex;align-items:center;gap:5px;padding:2px 8px;border-radius:2px;font-size:9px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;width:fit-content;}
 .lv1b{background:rgba(99,102,241,.12);color:#818CF8;border:1px solid rgba(99,102,241,.2);}
@@ -183,30 +162,19 @@ section.lp{padding:100px 52px;position:relative;z-index:1;}
 .lv5b{background:rgba(239,68,68,.1);color:#F87171;border:1px solid rgba(239,68,68,.2);}
 .lv-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;}
 .lv-range{font-size:10px;color:var(--muted);}
-
-/* ROI cell */
 .lv-roi{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:600;color:var(--gold);line-height:1;}
 .lv-roi-sub{font-size:9px;color:var(--muted);margin-top:2px;}
-
-/* Returns cells */
 .lv-ret-val{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--text);}
 .lv-ret-sub{font-size:10px;color:var(--muted);margin-top:2px;}
 .lv-ret-val.hi{color:var(--green);}
-
-/* Features cell */
 .lv-features{display:flex;flex-direction:column;gap:5px;}
 .lv-feat{font-size:10px;color:var(--text2);display:flex;align-items:center;gap:5px;}
 .lv-feat::before{content:'›';color:var(--gold);}
-
-/* CTA cell */
 .lr-cta{padding:16px 20px;}
-
-/* Progress bar */
 .lv-prog{margin-top:6px;}
 .prog-track{height:2px;background:var(--border);border-radius:1px;overflow:hidden;}
 .prog-fill{height:100%;border-radius:1px;background:linear-gradient(90deg,var(--gold),var(--gold-light));}
 
-/* ── FEATURES ── */
 .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-top:60px;}
 .feat{background:var(--bg2);padding:44px 36px;position:relative;overflow:hidden;transition:background .3s;}
 .feat::after{content:'';position:absolute;top:0;left:0;width:0;height:2px;background:linear-gradient(90deg,var(--gold),transparent);transition:width .4s;}
@@ -216,7 +184,6 @@ section.lp{padding:100px 52px;position:relative;z-index:1;}
 .feat h3{font-family:'Syne',sans-serif;font-weight:600;font-size:14px;margin-bottom:10px;}
 .feat p{color:var(--muted);font-size:12px;line-height:1.75;}
 
-/* ── INVEST / WALLETS ── */
 .invest-wrap{display:grid;grid-template-columns:1fr 400px;gap:52px;align-items:start;}
 .wallet-card{background:var(--surface);border:1px solid var(--border);padding:22px;margin-bottom:12px;transition:border-color .3s,transform .2s;}
 .wallet-card:hover{border-color:var(--gold-dim);transform:translateY(-2px);}
@@ -231,7 +198,6 @@ section.lp{padding:100px 52px;position:relative;z-index:1;}
 .copy-btn{background:none;border:none;color:var(--gold);cursor:pointer;font-size:15px;flex-shrink:0;transition:transform .2s;}
 .copy-btn:hover{transform:scale(1.2);}
 
-/* Calc form */
 .calc-form{background:var(--surface);border:1px solid var(--border);padding:36px;position:sticky;top:86px;}
 .calc-form h3{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:400;margin-bottom:6px;}
 .calc-form>p{color:var(--muted);font-size:12px;margin-bottom:24px;line-height:1.7;}
@@ -251,10 +217,8 @@ section.lp{padding:100px 52px;position:relative;z-index:1;}
 .submit-btn{width:100%;padding:13px;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#080500;border:none;cursor:pointer;font-family:'DM Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;transition:all .2s;margin-top:4px;}
 .submit-btn:hover{box-shadow:0 8px 28px rgba(201,168,76,.35);transform:translateY(-1px);}
 
-/* ── CONTACT STRIP ── */
 .contact-strip{display:flex;align-items:center;gap:16px;margin-top:32px;padding:18px 24px;background:var(--surface);border:1px solid var(--border);border-left:2px solid var(--gold);max-width:480px;}
 
-/* ── FOOTER ── */
 footer{border-top:1px solid var(--border);background:var(--bg2);padding:56px 52px 28px;position:relative;z-index:1;}
 .ft-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:44px;}
 .ft-brand p{color:var(--muted);font-size:12px;line-height:1.7;margin-top:13px;max-width:260px;}
@@ -264,7 +228,7 @@ footer{border-top:1px solid var(--border);background:var(--bg2);padding:56px 52p
 .ft-bot{display:flex;justify-content:space-between;align-items:center;padding-top:20px;border-top:1px solid var(--border);}
 .ft-bot p{font-size:11px;color:var(--muted);}
 
-/* ── MODAL ── */
+/* ── AUTH MODAL ── */
 .modal-overlay{position:fixed;inset:0;z-index:200;background:rgba(5,6,8,.92);backdrop-filter:blur(16px);display:none;align-items:center;justify-content:center;opacity:0;transition:opacity .3s;}
 .modal-overlay.open{display:flex;opacity:1;}
 .modal{background:var(--surface);border:1px solid var(--border);padding:44px;width:100%;max-width:440px;position:relative;animation:mIn .35s ease both;}
@@ -280,8 +244,49 @@ footer{border-top:1px solid var(--border);background:var(--bg2);padding:56px 52p
 .auth-msg{font-size:12px;padding:10px 14px;margin-bottom:14px;display:none;}
 .auth-msg.error{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.25);color:#F87171;}
 .auth-msg.success{background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.25);color:#4ADE80;}
+.auth-msg.info{background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.25);color:var(--gold);}
 
-/* ── DASHBOARD (unchanged from original, just kept) ── */
+/* Forgot Password link */
+.forgot-link{display:block;text-align:right;font-size:11px;color:var(--muted);cursor:pointer;margin-top:-10px;margin-bottom:18px;text-decoration:none;transition:color .2s;letter-spacing:.04em;}
+.forgot-link:hover{color:var(--gold);}
+
+/* ── FORGOT PASSWORD MODAL ── */
+.fp-overlay{position:fixed;inset:0;z-index:300;background:rgba(5,6,8,.95);backdrop-filter:blur(20px);display:none;align-items:center;justify-content:center;opacity:0;transition:opacity .3s;}
+.fp-overlay.open{display:flex;opacity:1;}
+.fp-modal{background:var(--surface);border:1px solid var(--border);padding:44px;width:100%;max-width:420px;position:relative;animation:mIn .35s ease both;}
+.fp-modal::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+.fp-modal-close{position:absolute;top:16px;right:18px;background:none;border:none;color:var(--muted);font-size:22px;cursor:pointer;transition:color .2s;}
+.fp-modal-close:hover{color:var(--gold);}
+.fp-modal h2{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:600;margin-bottom:6px;}
+.fp-modal>p.fp-sub{color:var(--muted);font-size:12px;margin-bottom:28px;line-height:1.6;}
+
+/* Step indicators */
+.fp-steps{display:flex;align-items:center;gap:0;margin-bottom:28px;}
+.fp-step{display:flex;align-items:center;gap:7px;flex:1;}
+.fp-step-num{width:24px;height:24px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--muted);transition:all .3s;flex-shrink:0;}
+.fp-step.active .fp-step-num{background:var(--gold);border-color:var(--gold);color:#080500;font-weight:700;}
+.fp-step.done .fp-step-num{background:var(--green);border-color:var(--green);color:#080500;}
+.fp-step-lbl{font-size:10px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;transition:color .3s;}
+.fp-step.active .fp-step-lbl{color:var(--gold);}
+.fp-step.done .fp-step-lbl{color:var(--green);}
+.fp-step-line{width:20px;height:1px;background:var(--border);flex-shrink:0;}
+
+/* Step panels */
+.fp-panel{display:none;}
+.fp-panel.active{display:block;animation:fu .3s ease both;}
+
+/* Recovered password display */
+.recovered-pass-box{background:var(--bg3);border:1px solid var(--border);border-left:2px solid var(--gold);padding:16px 18px;margin:16px 0 20px;display:flex;align-items:center;justify-content:space-between;gap:10px;}
+.rp-label{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:5px;}
+.rp-value{font-family:'DM Mono',monospace;font-size:15px;color:var(--gold);letter-spacing:.06em;}
+.rp-copy{background:none;border:none;color:var(--gold);cursor:pointer;font-size:14px;transition:transform .2s;flex-shrink:0;}
+.rp-copy:hover{transform:scale(1.2);}
+
+/* Reset password form inside forgot */
+.fp-back-link{display:inline-flex;align-items:center;gap:5px;font-size:11px;color:var(--muted);cursor:pointer;margin-bottom:20px;transition:color .2s;background:none;border:none;font-family:'DM Mono',monospace;letter-spacing:.04em;padding:0;}
+.fp-back-link:hover{color:var(--gold);}
+
+/* ── DASHBOARD ── */
 .dash-page{display:none;position:fixed;inset:0;z-index:150;background:var(--bg);overflow-y:auto;}
 .dash-page.active{display:block;}
 .dash-layout{display:grid;grid-template-columns:260px 1fr;min-height:100vh;}
@@ -358,7 +363,6 @@ footer{border-top:1px solid var(--border);background:var(--bg2);padding:56px 52p
 .psv{font-family:'Cormorant Garamond',serif;font-size:30px;color:var(--gold);}
 .psl{font-size:10px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-top:3px;}
 
-/* REVEAL */
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;}
 .reveal.visible{opacity:1;transform:none;}
 
@@ -399,6 +403,8 @@ footer{border-top:1px solid var(--border);background:var(--bg2);padding:56px 52p
       <div class="auth-msg" id="loginMsg"></div>
       <div class="field"><label>Email Address</label><input type="email" id="loginEmail" placeholder="you@example.com"/></div>
       <div class="field"><label>Password</label><input type="password" id="loginPass" placeholder="••••••••"/></div>
+      <!-- ✦ FORGOT PASSWORD LINK -->
+      <span class="forgot-link" onclick="openForgotPassword()">Forgot your password?</span>
       <button class="submit-btn" onclick="handleLogin()">Access Portfolio →</button>
     </div>
     <div id="registerForm" style="display:none;">
@@ -408,6 +414,85 @@ footer{border-top:1px solid var(--border);background:var(--bg2);padding:56px 52p
       <div class="field"><label>Password</label><input type="password" id="regPass" placeholder="Min 6 characters"/></div>
       <div class="field"><label>Referral Code (Optional)</label><input type="text" id="regRef" placeholder="ASCEND-XXXX"/></div>
       <button class="submit-btn" onclick="handleRegister()">Create Account →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ FORGOT PASSWORD MODAL ══ -->
+<div class="fp-overlay" id="fpOverlay">
+  <div class="fp-modal">
+    <button class="fp-modal-close" onclick="closeForgotPassword()">×</button>
+    <h2>Password Recovery</h2>
+    <p class="fp-sub">Recover or reset your AscendFi account password in seconds.</p>
+
+    <!-- Step indicators -->
+    <div class="fp-steps">
+      <div class="fp-step active" id="fpStep1Ind">
+        <div class="fp-step-num">1</div>
+        <div class="fp-step-lbl">Verify</div>
+      </div>
+      <div class="fp-step-line"></div>
+      <div class="fp-step" id="fpStep2Ind">
+        <div class="fp-step-num">2</div>
+        <div class="fp-step-lbl">Recover</div>
+      </div>
+      <div class="fp-step-line"></div>
+      <div class="fp-step" id="fpStep3Ind">
+        <div class="fp-step-num">3</div>
+        <div class="fp-step-lbl">Done</div>
+      </div>
+    </div>
+
+    <!-- Step 1: Enter email -->
+    <div class="fp-panel active" id="fpPanel1">
+      <div class="auth-msg" id="fpMsg1"></div>
+      <div class="field">
+        <label>Registered Email Address</label>
+        <input type="email" id="fpEmail" placeholder="you@example.com" onkeydown="if(event.key==='Enter')fpStep1Next()"/>
+      </div>
+      <button class="submit-btn" onclick="fpStep1Next()">Find My Account →</button>
+      <button class="fp-back-link" onclick="closeForgotPassword();openModal('login')">← Back to Login</button>
+    </div>
+
+    <!-- Step 2: Choose action — view or reset -->
+    <div class="fp-panel" id="fpPanel2">
+      <div class="auth-msg" id="fpMsg2"></div>
+
+      <!-- Sub-tabs: View password OR Set new password -->
+      <div class="modal-tabs" style="margin-bottom:22px;">
+        <button class="modal-tab active" id="fpTab1" onclick="switchFpTab('view')">View Password</button>
+        <button class="modal-tab" id="fpTab2" onclick="switchFpTab('reset')">Set New Password</button>
+      </div>
+
+      <!-- View password panel -->
+      <div id="fpViewPanel">
+        <p style="color:var(--muted);font-size:12px;line-height:1.7;margin-bottom:14px;">Account found. Your current password is shown below. Copy it, then go back to login.</p>
+        <div class="recovered-pass-box">
+          <div>
+            <div class="rp-label">Your Password</div>
+            <div class="rp-value" id="fpRevealedPass">••••••••</div>
+          </div>
+          <button class="rp-copy" id="fpCopyBtn" onclick="copyRecoveredPass()" title="Copy password">⧉</button>
+        </div>
+        <button class="submit-btn" onclick="fpGoToLogin()">Go to Login →</button>
+      </div>
+
+      <!-- Set new password panel -->
+      <div id="fpResetPanel" style="display:none;">
+        <div class="field"><label>New Password</label><input type="password" id="fpNewPass" placeholder="Min 6 characters"/></div>
+        <div class="field"><label>Confirm New Password</label><input type="password" id="fpConfPass" placeholder="Repeat new password"/></div>
+        <button class="submit-btn" onclick="fpResetPassword()">Reset Password →</button>
+      </div>
+    </div>
+
+    <!-- Step 3: Success -->
+    <div class="fp-panel" id="fpPanel3">
+      <div style="text-align:center;padding:10px 0 24px;">
+        <div style="font-size:44px;margin-bottom:16px;">✦</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:22px;margin-bottom:10px;" id="fpSuccessTitle">Password Reset!</div>
+        <p style="color:var(--muted);font-size:12px;line-height:1.7;margin-bottom:28px;" id="fpSuccessMsg">Your password has been updated successfully. You can now log in with your new password.</p>
+        <button class="submit-btn" onclick="fpGoToLogin()">Log In Now →</button>
+      </div>
     </div>
   </div>
 </div>
@@ -555,8 +640,6 @@ footer{border-top:1px solid var(--border);background:var(--bg2);padding:56px 52p
 
 <!-- ══ MAIN LANDING PAGE ══ -->
 <div class="page z1" id="mainPage">
-
-  <!-- NAV -->
   <nav class="z1">
     <a href="#" class="logo"><span class="logo-mark"></span>Ascend<span>Fi</span></a>
     <ul>
@@ -572,63 +655,33 @@ footer{border-top:1px solid var(--border);background:var(--bg2);padding:56px 52p
     </div>
   </nav>
 
-  <!-- ══ HERO ══ -->
   <section class="hero z1">
-    <!-- Left -->
     <div class="hero-left">
       <div class="hero-eyebrow"><span class="hero-eyebrow-line"></span><span>Next-Generation Crypto Investment</span></div>
-      <h1>
-        Where Capital<br/>
-        <em>Ascends.</em><br/>
-        <strong>Systematically.</strong>
-      </h1>
+      <h1>Where Capital<br/><em>Ascends.</em><br/><strong>Systematically.</strong></h1>
       <p class="hero-desc">AscendFi delivers institutional-grade crypto investment infrastructure to individual investors — with AI-optimized portfolios, transparent on-chain returns, and five tiered plans built for every ambition. From $500 to $500,000+.</p>
       <div class="hero-cta">
         <button class="btn btn-gold" onclick="openModal('register')">Start Investing →</button>
         <button class="btn btn-outline" onclick="openModal('login')">View Dashboard</button>
       </div>
-      <!-- Mini live stat strip -->
       <div class="hero-stats">
         <div class="hs"><div class="hs-lbl">Assets Under Mgmt</div><div class="hs-val">$2.4B+</div><div class="hs-chg">▲ Growing daily</div></div>
         <div class="hs"><div class="hs-lbl">Avg Annual Return</div><div class="hs-val">340%</div><div class="hs-chg">▲ Verified on-chain</div></div>
         <div class="hs"><div class="hs-lbl">Active Investors</div><div class="hs-val">98K+</div><div class="hs-chg">▲ +1,240 this week</div></div>
       </div>
     </div>
-    <!-- Right — live panel -->
     <div class="hero-panel">
-      <div class="hp-head">
-        <h3>Live Market Prices</h3>
-        <div class="hp-live"><span class="dot"></span>Real-time</div>
-      </div>
-      <div class="hp-chart">
-        <svg viewBox="0 0 380 80" preserveAspectRatio="none">
-          <defs><linearGradient id="hg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#C9A84C" stop-opacity=".25"/><stop offset="100%" stop-color="#C9A84C" stop-opacity="0"/></linearGradient></defs>
-          <path d="M0,65 C30,58 50,50 80,42 C110,34 130,46 160,32 C190,18 210,26 240,14 C270,2 300,10 330,5 C355,1 368,8 380,4" stroke="#C9A84C" stroke-width="1.8" fill="none"/>
-          <path d="M0,65 C30,58 50,50 80,42 C110,34 130,46 160,32 C190,18 210,26 240,14 C270,2 300,10 330,5 C355,1 368,8 380,4 L380,80 L0,80 Z" fill="url(#hg)"/>
-        </svg>
-      </div>
+      <div class="hp-head"><h3>Live Market Prices</h3><div class="hp-live"><span class="dot"></span>Real-time</div></div>
+      <div class="hp-chart"><svg viewBox="0 0 380 80" preserveAspectRatio="none"><defs><linearGradient id="hg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#C9A84C" stop-opacity=".25"/><stop offset="100%" stop-color="#C9A84C" stop-opacity="0"/></linearGradient></defs><path d="M0,65 C30,58 50,50 80,42 C110,34 130,46 160,32 C190,18 210,26 240,14 C270,2 300,10 330,5 C355,1 368,8 380,4" stroke="#C9A84C" stroke-width="1.8" fill="none"/><path d="M0,65 C30,58 50,50 80,42 C110,34 130,46 160,32 C190,18 210,26 240,14 C270,2 300,10 330,5 C355,1 368,8 380,4 L380,80 L0,80 Z" fill="url(#hg)"/></svg></div>
       <div class="hp-prices" id="livePrices">
-        <div class="price-row">
-          <div class="pr-left"><div class="pr-ico" style="background:rgba(247,147,26,.12);color:#F7931A;">₿</div><div><div class="pr-name">Bitcoin</div><div class="pr-sym">BTC</div></div></div>
-          <div class="pr-right"><div class="pr-price" id="btc-p">$63,842</div><div class="pr-chg up" id="btc-c">+3.42%</div><div class="pr-bar" style="background:rgba(34,197,94,.3);width:80%;margin-left:auto;"></div></div>
-        </div>
-        <div class="price-row">
-          <div class="pr-left"><div class="pr-ico" style="background:rgba(98,126,234,.12);color:#627EEA;">Ξ</div><div><div class="pr-name">Ethereum</div><div class="pr-sym">ETH</div></div></div>
-          <div class="pr-right"><div class="pr-price" id="eth-p">$3,071</div><div class="pr-chg up" id="eth-c">+1.87%</div><div class="pr-bar" style="background:rgba(34,197,94,.3);width:55%;margin-left:auto;"></div></div>
-        </div>
-        <div class="price-row">
-          <div class="pr-left"><div class="pr-ico" style="background:rgba(153,69,255,.12);color:#9945FF;">◎</div><div><div class="pr-name">Solana</div><div class="pr-sym">SOL</div></div></div>
-          <div class="pr-right"><div class="pr-price" id="sol-p">$128.30</div><div class="pr-chg dn" id="sol-c">-0.94%</div><div class="pr-bar" style="background:rgba(239,68,68,.3);width:30%;margin-left:auto;"></div></div>
-        </div>
-        <div class="price-row">
-          <div class="pr-left"><div class="pr-ico" style="background:rgba(240,185,11,.12);color:#F0B90B;">⬡</div><div><div class="pr-name">BNB</div><div class="pr-sym">BNB</div></div></div>
-          <div class="pr-right"><div class="pr-price" id="bnb-p">$572.80</div><div class="pr-chg up" id="bnb-c">+2.11%</div><div class="pr-bar" style="background:rgba(34,197,94,.3);width:65%;margin-left:auto;"></div></div>
-        </div>
+        <div class="price-row"><div class="pr-left"><div class="pr-ico" style="background:rgba(247,147,26,.12);color:#F7931A;">₿</div><div><div class="pr-name">Bitcoin</div><div class="pr-sym">BTC</div></div></div><div class="pr-right"><div class="pr-price" id="btc-p">$63,842</div><div class="pr-chg up" id="btc-c">+3.42%</div><div class="pr-bar" style="background:rgba(34,197,94,.3);width:80%;margin-left:auto;"></div></div></div>
+        <div class="price-row"><div class="pr-left"><div class="pr-ico" style="background:rgba(98,126,234,.12);color:#627EEA;">Ξ</div><div><div class="pr-name">Ethereum</div><div class="pr-sym">ETH</div></div></div><div class="pr-right"><div class="pr-price" id="eth-p">$3,071</div><div class="pr-chg up" id="eth-c">+1.87%</div><div class="pr-bar" style="background:rgba(34,197,94,.3);width:55%;margin-left:auto;"></div></div></div>
+        <div class="price-row"><div class="pr-left"><div class="pr-ico" style="background:rgba(153,69,255,.12);color:#9945FF;">◎</div><div><div class="pr-name">Solana</div><div class="pr-sym">SOL</div></div></div><div class="pr-right"><div class="pr-price" id="sol-p">$128.30</div><div class="pr-chg dn" id="sol-c">-0.94%</div><div class="pr-bar" style="background:rgba(239,68,68,.3);width:30%;margin-left:auto;"></div></div></div>
+        <div class="price-row"><div class="pr-left"><div class="pr-ico" style="background:rgba(240,185,11,.12);color:#F0B90B;">⬡</div><div><div class="pr-name">BNB</div><div class="pr-sym">BNB</div></div></div><div class="pr-right"><div class="pr-price" id="bnb-p">$572.80</div><div class="pr-chg up" id="bnb-c">+2.11%</div><div class="pr-bar" style="background:rgba(34,197,94,.3);width:65%;margin-left:auto;"></div></div></div>
       </div>
     </div>
   </section>
 
-  <!-- TICKER -->
   <div class="ticker-wrap z1">
     <div class="ticker">
       <div class="ti"><span class="sym">BTC</span><span>$63,842</span><span class="up">+3.42%</span></div>
@@ -650,7 +703,6 @@ footer{border-top:1px solid var(--border);background:var(--bg2);padding:56px 52p
     </div>
   </div>
 
-  <!-- STATS BAND -->
   <div class="stats-band reveal z1" id="about">
     <div class="sb"><div class="sb-num">$2.4B+</div><div class="sb-lbl">Assets Under Management</div></div>
     <div class="sb"><div class="sb-num">98K+</div><div class="sb-lbl">Active Investors</div></div>
@@ -658,13 +710,11 @@ footer{border-top:1px solid var(--border);background:var(--bg2);padding:56px 52p
     <div class="sb"><div class="sb-num">99.9%</div><div class="sb-lbl">Platform Uptime</div></div>
   </div>
 
-  <!-- ══ ABOUT + INVESTMENT DETAIL ══ -->
   <section class="lp z1" style="background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
     <div class="reveal">
       <span class="sec-tag">✦ About AscendFi</span>
       <h2 class="sec-title">Built to grow<br/>serious wealth.</h2>
     </div>
-
     <div class="about-hero reveal">
       <div class="about-text">
         <p>AscendFi is a next-generation cryptocurrency investment platform designed for investors who expect more than average market returns. We combine proprietary AI-driven trading algorithms with institutional-grade security infrastructure to deliver consistent, compounding returns across five distinct investment tiers.</p>
@@ -698,15 +748,13 @@ footer{border-top:1px solid var(--border);background:var(--bg2);padding:56px 52p
       </div>
     </div>
 
-    <!-- ══ 5 INVESTMENT LEVELS ══ -->
-    <div class="levels-intro reveal">
+    <div class="levels-intro reveal" id="plans">
       <span class="sec-tag">✦ Investment Tiers</span>
       <h2 class="sec-title" style="font-size:clamp(32px,4vw,54px);">Five levels.<br/>One destination.</h2>
       <p>Your investment level is automatically assigned based on your total deposit amount. Each level unlocks higher weekly ROI, faster withdrawals, and premium account features. All plans run automatically — your returns compound while you sleep.</p>
     </div>
 
     <div class="levels-table reveal">
-      <!-- Header row -->
       <div class="level-row head">
         <div class="lr-cell"><span class="lr-head-lbl">Level / Plan</span></div>
         <div class="lr-cell"><span class="lr-head-lbl">ROI</span></div>
@@ -715,7 +763,6 @@ footer{border-top:1px solid var(--border);background:var(--bg2);padding:56px 52p
         <div class="lr-cell"><span class="lr-head-lbl">Features</span></div>
         <div class="lr-cell"><span class="lr-head-lbl">Action</span></div>
       </div>
-      <!-- Level 1 -->
       <div class="level-row">
         <div class="lr-cell"><div class="lv-name"><span class="lv-badge lv1b">Level 1</span><span class="lv-title">Starter</span><span class="lv-range">Entry tier</span></div></div>
         <div class="lr-cell"><div class="lv-roi">3%<div class="lv-roi-sub">per week</div></div></div>
@@ -724,7 +771,6 @@ footer{border-top:1px solid var(--border);background:var(--bg2);padding:56px 52p
         <div class="lr-cell"><div class="lv-features"><div class="lv-feat">Weekly ROI payouts</div><div class="lv-feat">BTC, ETH, SOL</div><div class="lv-feat">Email support</div><div class="lv-feat">Withdrawal in 48h</div></div></div>
         <div class="lr-cta"><button class="btn btn-outline" style="font-size:10px;padding:8px 16px;" onclick="openModal('register')">Get Started</button></div>
       </div>
-      <!-- Level 2 -->
       <div class="level-row">
         <div class="lr-cell"><div class="lv-name"><span class="lv-badge lv2b">Level 2</span><span class="lv-title">Builder</span><span class="lv-range">Growth entry</span></div></div>
         <div class="lr-cell"><div class="lv-roi">4%<div class="lv-roi-sub">per week</div></div></div>
@@ -733,7 +779,6 @@ footer{border-top:1px solid var(--border);background:var(--bg2);padding:56px 52p
         <div class="lr-cell"><div class="lv-features"><div class="lv-feat">Weekly ROI + compounding</div><div class="lv-feat">All chains supported</div><div class="lv-feat">Priority support</div><div class="lv-feat">Withdrawal in 36h</div></div></div>
         <div class="lr-cta"><button class="btn btn-outline" style="font-size:10px;padding:8px 16px;" onclick="openModal('register')">Get Started</button></div>
       </div>
-      <!-- Level 3 -->
       <div class="level-row" style="background:var(--surface2);position:relative;">
         <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);"></div>
         <div class="lr-cell"><div class="lv-name"><span class="lv-badge lv3b">Level 3</span><span class="lv-title">Growth Plus</span><span class="lv-range">★ Most popular</span></div></div>
@@ -743,7 +788,6 @@ footer{border-top:1px solid var(--border);background:var(--bg2);padding:56px 52p
         <div class="lr-cell"><div class="lv-features"><div class="lv-feat">Daily compounding</div><div class="lv-feat">Dedicated account mgr</div><div class="lv-feat">DeFi access</div><div class="lv-feat">Withdrawal in 24h</div></div></div>
         <div class="lr-cta"><button class="btn btn-gold" style="font-size:10px;padding:8px 16px;" onclick="openModal('register')">Invest Now</button></div>
       </div>
-      <!-- Level 4 -->
       <div class="level-row">
         <div class="lr-cell"><div class="lv-name"><span class="lv-badge lv4b">Level 4</span><span class="lv-title">Quantum Elite</span><span class="lv-range">High performance</span></div></div>
         <div class="lr-cell"><div class="lv-roi">6%<div class="lv-roi-sub">per week</div></div></div>
@@ -752,7 +796,6 @@ footer{border-top:1px solid var(--border);background:var(--bg2);padding:56px 52p
         <div class="lr-cell"><div class="lv-features"><div class="lv-feat">Hourly compounding</div><div class="lv-feat">VIP concierge</div><div class="lv-feat">Full DeFi + multi-chain</div><div class="lv-feat">Withdrawal in 12h</div></div></div>
         <div class="lr-cta"><button class="btn btn-outline" style="font-size:10px;padding:8px 16px;" onclick="openModal('register')">Get Started</button></div>
       </div>
-      <!-- Level 5 -->
       <div class="level-row">
         <div class="lr-cell"><div class="lv-name"><span class="lv-badge lv5b">Level 5</span><span class="lv-title">Apex Pro</span><span class="lv-range">Institutional</span></div></div>
         <div class="lr-cell"><div class="lv-roi">8%<div class="lv-roi-sub">per week</div></div></div>
@@ -763,7 +806,6 @@ footer{border-top:1px solid var(--border);background:var(--bg2);padding:56px 52p
       </div>
     </div>
 
-    <!-- Contact -->
     <div class="reveal" style="margin-top:60px;">
       <span class="sec-tag">✦ Contact & Support</span>
       <h2 class="sec-title" style="font-size:clamp(26px,3.5vw,44px);">Get in touch<br/>with our team.</h2>
@@ -779,7 +821,6 @@ footer{border-top:1px solid var(--border);background:var(--bg2);padding:56px 52p
     </div>
   </section>
 
-  <!-- ══ FEATURES ══ -->
   <section class="lp z1" id="features">
     <div class="reveal">
       <span class="sec-tag">✦ Why AscendFi</span>
@@ -796,7 +837,6 @@ footer{border-top:1px solid var(--border);background:var(--bg2);padding:56px 52p
     </div>
   </section>
 
-  <!-- ══ INVEST / DEPOSIT ══ -->
   <section class="lp z1" id="invest" style="background:var(--bg2);border-top:1px solid var(--border);">
     <div class="invest-wrap reveal">
       <div>
@@ -846,7 +886,6 @@ footer{border-top:1px solid var(--border);background:var(--bg2);padding:56px 52p
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     <div class="ft-grid">
       <div class="ft-brand">
@@ -891,6 +930,7 @@ function handleRegister(){
   showMsg('registerMsg','Account created! Opening dashboard…','success');
   setTimeout(()=>{closeModal();openDashboard();},700);
 }
+
 function handleLogin(){
   const email=document.getElementById('loginEmail').value.trim().toLowerCase();
   const pass=document.getElementById('loginPass').value;
@@ -902,6 +942,7 @@ function handleLogin(){
   setSession(user);showMsg('loginMsg','Login successful! Opening dashboard…','success');
   setTimeout(()=>{closeModal();openDashboard();},600);
 }
+
 function handleLogout(){clearSession();closeDashboard();}
 
 function openModal(tab='login'){
@@ -925,6 +966,114 @@ function switchTab(tab,el){
 }
 document.getElementById('authModal').addEventListener('click',function(e){if(e.target===this)closeModal();});
 
+// ══════════════════════════════════════
+// ── FORGOT PASSWORD LOGIC ──
+// ══════════════════════════════════════
+let _fpEmail = '';   // email found in step 1
+
+function openForgotPassword(){
+  closeModal();
+  // reset state
+  _fpEmail='';
+  document.getElementById('fpEmail').value='';
+  hideMsg('fpMsg1'); hideMsg('fpMsg2');
+  document.getElementById('fpNewPass').value='';
+  document.getElementById('fpConfPass').value='';
+  // go to step 1
+  goFpPanel(1);
+  switchFpTab('view');
+  // open overlay
+  const ov=document.getElementById('fpOverlay');
+  ov.style.display='flex';
+  setTimeout(()=>ov.classList.add('open'),10);
+  setTimeout(()=>document.getElementById('fpEmail').focus(),350);
+}
+
+function closeForgotPassword(){
+  const ov=document.getElementById('fpOverlay');
+  ov.classList.remove('open');
+  setTimeout(()=>ov.style.display='none',300);
+}
+
+document.getElementById('fpOverlay').addEventListener('click',function(e){
+  if(e.target===this)closeForgotPassword();
+});
+
+function goFpPanel(n){
+  // Update panels
+  document.querySelectorAll('.fp-panel').forEach((p,i)=>{
+    p.classList.toggle('active', i===n-1);
+  });
+  // Update step indicators
+  for(let i=1;i<=3;i++){
+    const ind=document.getElementById('fpStep'+i+'Ind');
+    ind.classList.remove('active','done');
+    if(i<n) ind.classList.add('done');
+    else if(i===n) ind.classList.add('active');
+  }
+}
+
+function fpStep1Next(){
+  const email=document.getElementById('fpEmail').value.trim().toLowerCase();
+  if(!email||!/\S+@\S+\.\S+/.test(email)){
+    return showMsg('fpMsg1','Please enter a valid email address.','error');
+  }
+  const users=getUsers();
+  if(!users[email]){
+    return showMsg('fpMsg1','No account found with this email address.','error');
+  }
+  // Account found
+  _fpEmail=email;
+  // Show password in view tab
+  document.getElementById('fpRevealedPass').textContent=users[email].password;
+  hideMsg('fpMsg1');
+  goFpPanel(2);
+}
+
+function switchFpTab(tab){
+  document.getElementById('fpViewPanel').style.display = tab==='view'?'block':'none';
+  document.getElementById('fpResetPanel').style.display = tab==='reset'?'block':'none';
+  document.getElementById('fpTab1').classList.toggle('active', tab==='view');
+  document.getElementById('fpTab2').classList.toggle('active', tab==='reset');
+  hideMsg('fpMsg2');
+}
+
+function copyRecoveredPass(){
+  const pass=document.getElementById('fpRevealedPass').textContent;
+  navigator.clipboard.writeText(pass).then(()=>{
+    const btn=document.getElementById('fpCopyBtn');
+    btn.textContent='✓'; btn.style.color='var(--green)';
+    setTimeout(()=>{btn.textContent='⧉'; btn.style.color='';},2000);
+  });
+}
+
+function fpResetPassword(){
+  const nw=document.getElementById('fpNewPass').value;
+  const conf=document.getElementById('fpConfPass').value;
+  if(nw.length<6) return showMsg('fpMsg2','New password must be at least 6 characters.','error');
+  if(nw!==conf) return showMsg('fpMsg2','Passwords do not match.','error');
+  // Update stored password
+  const users=getUsers();
+  users[_fpEmail].password=nw;
+  saveUsers(users);
+  // Update session if same user is logged in
+  const sess=getSession();
+  if(sess&&sess.email===_fpEmail){sess.password=nw;setSession(sess);}
+  // Go to success step
+  document.getElementById('fpSuccessTitle').textContent='Password Reset!';
+  document.getElementById('fpSuccessMsg').textContent='Your password has been updated successfully. You can now log in with your new password.';
+  goFpPanel(3);
+}
+
+function fpGoToLogin(){
+  closeForgotPassword();
+  // Pre-fill email in login form
+  setTimeout(()=>{
+    openModal('login');
+    if(_fpEmail) document.getElementById('loginEmail').value=_fpEmail;
+  },350);
+}
+
 // ── DASHBOARD ──
 function openDashboard(){
   const user=getSession();if(!user)return;
@@ -934,7 +1083,7 @@ function openDashboard(){
   document.getElementById('dashDate').textContent=new Date().toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
   document.getElementById('sidebarName').textContent=user.name;
   const ini=user.name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
-  const setAv=(id)=>{const e=document.getElementById(id);if(!e)return;e.innerHTML=user.avatar?`<img src="${user.avatar}" alt="av"/>`  :ini;};
+  const setAv=(id)=>{const e=document.getElementById(id);if(!e)return;e.innerHTML=user.avatar?`<img src="${user.avatar}" alt="av"/>`:ini;};
   ['sidebarAvatar','profileAvatarLg','settingsAvatarPreview'].forEach(setAv);
   document.getElementById('profileName').textContent=user.name;
   document.getElementById('profileEmail').textContent=user.email;
@@ -1027,8 +1176,7 @@ function updatePrices(){
   Object.entries(prices).forEach(([k,v])=>{
     const pe=document.getElementById(v.el);const ce=document.getElementById(v.chgEl);
     if(!pe||!ce)return;
-    const np=jitter(v.base,.002);
-    const nc=v.chg+(Math.random()-.5)*.1;
+    const np=jitter(v.base,.002);const nc=v.chg+(Math.random()-.5)*.1;
     pe.textContent='$'+np.toLocaleString('en-US',{minimumFractionDigits:np<10?2:0,maximumFractionDigits:np<10?2:0});
     ce.textContent=(nc>=0?'+':'')+nc.toFixed(2)+'%';
     ce.className='pr-chg '+(nc>=0?'up':'dn');
