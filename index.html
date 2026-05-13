@@ -5,9 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>AscendFi — Ascend Your Wealth</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
-<!-- Tailwind utilities layered on top of existing AscendFi CSS (preflight off = no global reset). Major addition per spec. -->
-<script src="https://cdn.tailwindcss.com"></script>
-<script>tailwind.config={corePlugins:{preflight:false}};</script>
 <style>
 :root {
   --gold: #C9A84C;
@@ -198,51 +195,8 @@ section.lp{padding:100px 52px;position:relative;z-index:1;}
 .wc-lbl{font-family:'Syne',sans-serif;font-weight:600;font-size:13px;}
 .wc-net{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;}
 .wc-addr{background:var(--bg3);border:1px solid var(--border);padding:10px 14px;font-size:11px;color:var(--muted);display:flex;align-items:center;justify-content:space-between;gap:8px;word-break:break-all;}
-/* Major change: stronger legibility for on-chain addresses on dashboard + deposit views */
-.funding-strip .wc-addr,.dash-panel-section#section-deposit .wc-addr{font-size:12px;color:var(--text);}
-/* Major: deposit banner clarifies Level 1 default for new Real accounts (spec alignment) */
-.deposit-level-banner{font-size:11px;color:var(--text2);line-height:1.65;margin-bottom:16px;padding:12px 14px;background:var(--bg3);border:1px solid var(--border);border-left:2px solid var(--gold);}
-.funding-strip .wc-addr [data-chain],.dash-panel-section#section-deposit .wc-addr [data-chain]{font-weight:500;letter-spacing:.03em;}
 .copy-btn{background:none;border:none;color:var(--gold);cursor:pointer;font-size:15px;flex-shrink:0;transition:transform .2s;}
 .copy-btn:hover{transform:scale(1.2);}
-.copy-btn-txt{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);background:rgba(201,168,76,.08);border:1px solid var(--border);padding:6px 10px;border-radius:2px;cursor:pointer;font-family:'DM Mono',monospace;flex-shrink:0;}
-.copy-btn-txt:hover{border-color:var(--gold-dim);}
-
-/* ── Toast, account mode toggle, password row, login loading (major UI additions) ── */
-.app-toast-wrap{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);z-index:400;pointer-events:none;display:flex;flex-direction:column;gap:8px;align-items:center;}
-.app-toast{background:var(--surface2);border:1px solid var(--gold-dim);color:var(--text);padding:12px 22px;font-size:12px;letter-spacing:.04em;box-shadow:0 12px 40px rgba(0,0,0,.45);animation:toastIn .35s ease both;max-width:90vw;text-align:center;}
-.app-toast.success{border-color:rgba(34,197,94,.4);color:#86EFAC;}
-@keyframes toastIn{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
-
-.account-toggle{display:inline-flex;border:1px solid var(--border);border-radius:2px;overflow:hidden;margin-right:10px;}
-.account-toggle button{background:transparent;border:none;color:var(--muted);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:8px 14px;cursor:pointer;transition:all .2s;}
-.account-toggle button:hover{color:var(--text);}
-.account-toggle button.on{background:rgba(201,168,76,.12);color:var(--gold);}
-
-.field-pw-row{position:relative;display:flex;gap:8px;align-items:stretch;}
-.field-pw-row input{flex:1;}
-.pw-toggle{flex-shrink:0;min-width:42px;background:var(--bg3);border:1px solid var(--border);color:var(--muted);cursor:pointer;font-size:11px;border-radius:2px;transition:all .2s;}
-.pw-toggle:hover{border-color:var(--gold);color:var(--gold);}
-.remember-row{display:flex;align-items:center;gap:8px;margin:-6px 0 14px;font-size:11px;color:var(--text2);}
-.remember-row input{width:auto;accent-color:var(--gold);}
-
-.submit-btn:disabled{opacity:.55;cursor:not-allowed;transform:none;box-shadow:none;}
-.submit-btn.loading{position:relative;color:transparent!important;}
-.submit-btn.loading::after{content:'';position:absolute;inset:0;margin:auto;width:18px;height:18px;border:2px solid rgba(8,5,0,.25);border-top-color:#080500;border-radius:50%;animation:spin .7s linear infinite;}
-@keyframes spin{to{transform:rotate(360deg);}}
-
-.dash-topbar-left{display:flex;flex-direction:column;gap:8px;}
-.dash-mode-hint{font-size:10px;color:var(--muted);letter-spacing:.06em;}
-.dash-mode-hint strong{color:var(--gold);}
-
-.funding-strip{margin-bottom:22px;}
-.funding-strip .wallet-card{margin-bottom:10px;padding:16px 18px;}
-.funding-strip .wc-top{margin-bottom:10px;}
-.deposit-sim-box{background:var(--bg3);border:1px solid var(--border);padding:18px 20px;margin-top:18px;border-radius:2px;}
-.deposit-sim-box h4{font-family:'Syne',sans-serif;font-size:12px;margin-bottom:10px;}
-.deposit-sim-note{font-size:10px;color:var(--muted);line-height:1.6;margin-top:10px;}
-/* Major: visual cue when Deposit routes logged-out users to public wallet block */
-#public-deposit-wallets.deposit-scrollflash{outline:2px solid rgba(201,168,76,.55);outline-offset:8px;border-radius:4px;transition:outline-color .3s ease;}
 
 .calc-form{background:var(--surface);border:1px solid var(--border);padding:36px;position:sticky;top:86px;}
 .calc-form h3{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:400;margin-bottom:6px;}
@@ -431,16 +385,13 @@ footer{border-top:1px solid var(--border);background:var(--bg2);padding:56px 52p
 </style>
 </head>
 <body>
-<!-- Stack: portable single-file SPA (vanilla JS + Tailwind CDN). State mirrors sessionStorage/localStorage keys (SESSION_KEY, VIEW_MODE_KEY, USERS_KEY). A production app would typically use React/Vite + Tailwind as modules; this file keeps one deployable artifact without a bundler. -->
-<!-- Toast host: copy + system notifications -->
-<div class="app-toast-wrap" id="toastHost" aria-live="polite"></div>
 <div class="grid-bg"></div>
 <div class="orb o1"></div>
 <div class="orb o2"></div>
 
 <!-- ══ AUTH MODAL ══ -->
 <div class="modal-overlay" id="authModal">
-  <div class="modal max-w-md shadow-2xl shadow-black/50 ring-1 ring-white/5">
+  <div class="modal">
     <button class="modal-close" onclick="closeModal()">×</button>
     <h2>Welcome Back</h2>
     <p>Access your AscendFi portfolio and manage your investments securely.</p>
@@ -448,34 +399,21 @@ footer{border-top:1px solid var(--border);background:var(--bg2);padding:56px 52p
       <button class="modal-tab active" onclick="switchTab('login',this)">Login</button>
       <button class="modal-tab" onclick="switchTab('register',this)">Register</button>
     </div>
-    <div id="loginForm" onkeydown="if(event.key==='Enter'){event.preventDefault();handleLogin();}">
+    <div id="loginForm">
       <div class="auth-msg" id="loginMsg"></div>
-      <!-- Major: client PBKDF2 is not a substitute for server-side auth — passwords must be verified and re-hashed with a server pepper in production. -->
-      <p class="text-[10px] leading-relaxed mb-3 border-l-2 pl-3" style="color:var(--muted);border-color:rgba(201,168,76,.35);">Credentials are validated on this device for demo purposes only. Production apps must authenticate on the server and never trust the client alone.</p>
-      <div class="field"><label>Email Address</label><input type="email" id="loginEmail" placeholder="you@example.com" autocomplete="username" maxlength="120"/></div>
-      <div class="field"><label>Password</label>
-        <div class="field-pw-row">
-          <input type="password" id="loginPass" placeholder="Min 8 characters" autocomplete="current-password" maxlength="128"/>
-          <button type="button" class="pw-toggle" onclick="togglePwVisibility('loginPass',this)" aria-label="Show password">Show</button>
-        </div>
-      </div>
-      <label class="remember-row"><input type="checkbox" id="loginRemember"/> Remember me on this device</label>
+      <div class="field"><label>Email Address</label><input type="email" id="loginEmail" placeholder="you@example.com"/></div>
+      <div class="field"><label>Password</label><input type="password" id="loginPass" placeholder="••••••••"/></div>
+      <!-- ✦ FORGOT PASSWORD LINK -->
       <span class="forgot-link" onclick="openForgotPassword()">Forgot your password?</span>
-      <button type="button" class="submit-btn" id="loginSubmitBtn" onclick="handleLogin()">Access Portfolio →</button>
+      <button class="submit-btn" onclick="handleLogin()">Access Portfolio →</button>
     </div>
     <div id="registerForm" style="display:none;">
       <div class="auth-msg" id="registerMsg"></div>
-      <div class="field"><label>Full Name / Nickname</label><input type="text" id="regName" placeholder="e.g. Alex or PacianChigo" maxlength="80"/></div>
-      <div class="field"><label>Email Address</label><input type="email" id="regEmail" placeholder="you@example.com" maxlength="120"/></div>
-      <div class="field"><label>Password</label>
-        <div class="field-pw-row">
-          <input type="password" id="regPass" placeholder="Min 8 characters" maxlength="128"/>
-          <button type="button" class="pw-toggle" onclick="togglePwVisibility('regPass',this)" aria-label="Show password">Show</button>
-        </div>
-      </div>
-      <div class="field"><label>Referral Code (Optional)</label><input type="text" id="regRef" placeholder="ASCEND-XXXX" maxlength="32"/></div>
-      <label class="remember-row"><input type="checkbox" id="regRemember"/> Remember me on this device</label>
-      <button type="button" class="submit-btn" id="registerSubmitBtn" onclick="handleRegister()">Create Account →</button>
+      <div class="field"><label>Full Name / Nickname</label><input type="text" id="regName" placeholder="e.g. Alex or PacianChigo"/></div>
+      <div class="field"><label>Email Address</label><input type="email" id="regEmail" placeholder="you@example.com"/></div>
+      <div class="field"><label>Password</label><input type="password" id="regPass" placeholder="Min 6 characters"/></div>
+      <div class="field"><label>Referral Code (Optional)</label><input type="text" id="regRef" placeholder="ASCEND-XXXX"/></div>
+      <button class="submit-btn" onclick="handleRegister()">Create Account →</button>
     </div>
   </div>
 </div>
@@ -494,9 +432,9 @@ footer{border-top:1px solid var(--border);background:var(--bg2);padding:56px 52p
         <div class="fp-step-lbl">Verify</div>
       </div>
       <div class="fp-step-line"></div>
-        <div class="fp-step" id="fpStep2Ind">
+      <div class="fp-step" id="fpStep2Ind">
         <div class="fp-step-num">2</div>
-        <div class="fp-step-lbl">Reset</div>
+        <div class="fp-step-lbl">Recover</div>
       </div>
       <div class="fp-step-line"></div>
       <div class="fp-step" id="fpStep3Ind">
@@ -512,28 +450,39 @@ footer{border-top:1px solid var(--border);background:var(--bg2);padding:56px 52p
         <label>Registered Email Address</label>
         <input type="email" id="fpEmail" placeholder="you@example.com" onkeydown="if(event.key==='Enter')fpStep1Next()"/>
       </div>
-      <button type="button" class="submit-btn" onclick="fpStep1Next()">Continue →</button>
+      <button class="submit-btn" onclick="fpStep1Next()">Find My Account →</button>
       <button class="fp-back-link" onclick="closeForgotPassword();openModal('login')">← Back to Login</button>
     </div>
 
-    <!-- Step 2: Reset only (no plaintext password reveal — production would email a link) -->
+    <!-- Step 2: Choose action — view or reset -->
     <div class="fp-panel" id="fpPanel2">
       <div class="auth-msg" id="fpMsg2"></div>
-      <p style="color:var(--muted);font-size:12px;line-height:1.7;margin-bottom:18px;">Choose a new password for this account. Minimum 8 characters.</p>
-      <div class="field"><label>New Password</label>
-        <div class="field-pw-row">
-          <input type="password" id="fpNewPass" placeholder="Min 8 characters" maxlength="128"/>
-          <button type="button" class="pw-toggle" onclick="togglePwVisibility('fpNewPass',this)" aria-label="Show password">Show</button>
-        </div>
+
+      <!-- Sub-tabs: View password OR Set new password -->
+      <div class="modal-tabs" style="margin-bottom:22px;">
+        <button class="modal-tab active" id="fpTab1" onclick="switchFpTab('view')">View Password</button>
+        <button class="modal-tab" id="fpTab2" onclick="switchFpTab('reset')">Set New Password</button>
       </div>
-      <div class="field"><label>Confirm New Password</label>
-        <div class="field-pw-row">
-          <input type="password" id="fpConfPass" placeholder="Repeat new password" maxlength="128"/>
-          <button type="button" class="pw-toggle" onclick="togglePwVisibility('fpConfPass',this)" aria-label="Show password">Show</button>
+
+      <!-- View password panel -->
+      <div id="fpViewPanel">
+        <p style="color:var(--muted);font-size:12px;line-height:1.7;margin-bottom:14px;">Account found. Your current password is shown below. Copy it, then go back to login.</p>
+        <div class="recovered-pass-box">
+          <div>
+            <div class="rp-label">Your Password</div>
+            <div class="rp-value" id="fpRevealedPass">••••••••</div>
+          </div>
+          <button class="rp-copy" id="fpCopyBtn" onclick="copyRecoveredPass()" title="Copy password">⧉</button>
         </div>
+        <button class="submit-btn" onclick="fpGoToLogin()">Go to Login →</button>
       </div>
-      <button type="button" class="submit-btn" onclick="fpResetPassword()">Reset Password →</button>
-      <button type="button" class="fp-back-link" style="margin-top:16px;" onclick="goFpPanel(1)">← Back</button>
+
+      <!-- Set new password panel -->
+      <div id="fpResetPanel" style="display:none;">
+        <div class="field"><label>New Password</label><input type="password" id="fpNewPass" placeholder="Min 6 characters"/></div>
+        <div class="field"><label>Confirm New Password</label><input type="password" id="fpConfPass" placeholder="Repeat new password"/></div>
+        <button class="submit-btn" onclick="fpResetPassword()">Reset Password →</button>
+      </div>
     </div>
 
     <!-- Step 3: Success -->
@@ -557,24 +506,24 @@ footer{border-top:1px solid var(--border);background:var(--bg2);padding:56px 52p
           <span class="logo-mark"></span>Ascend<span>Fi</span>
         </a>
       </div>
-      <div class="dash-user" onclick="showDashSection('profile',document.querySelector('[data-dash-nav=profile]'))" title="View Profile">
+      <div class="dash-user" onclick="showDashSection('profile')" title="View Profile">
         <div class="user-avatar" id="sidebarAvatar">JD</div>
-            <div><div class="user-name" id="sidebarName">User</div><div class="user-role" id="sidebarRole">Premium Investor</div></div>
+        <div><div class="user-name" id="sidebarName">User</div><div class="user-role">Premium Investor</div></div>
       </div>
       <nav class="dash-nav">
         <div class="dash-nav-section">Overview</div>
-        <div class="dash-nav-item active" data-dash-nav="home" onclick="showDashSection('home',this)">📊 &nbsp;Dashboard</div>
-        <div class="dash-nav-item" data-dash-nav="portfolio" onclick="showDashSection('portfolio',this)">💼 &nbsp;Portfolio</div>
+        <div class="dash-nav-item active" onclick="showDashSection('home',this)">📊 &nbsp;Dashboard</div>
+        <div class="dash-nav-item" onclick="showDashSection('portfolio',this)">💼 &nbsp;Portfolio</div>
         <div class="dash-nav-item" onclick="showDashSection('home',this)">📈 &nbsp;Markets</div>
         <div class="dash-nav-section">Investments</div>
-        <div class="dash-nav-item" data-dash-nav="deposit" onclick="goToDeposit(this)">💰 &nbsp;Deposit</div>
+        <div class="dash-nav-item" onclick="openModal()">💰 &nbsp;Deposit</div>
         <div class="dash-nav-item" onclick="showDashSection('home',this)">🔄 &nbsp;Withdraw</div>
         <div class="dash-nav-item" onclick="showDashSection('home',this)">📋 &nbsp;Transactions</div>
         <div class="dash-nav-section">Account</div>
-        <div class="dash-nav-item" data-dash-nav="settings" onclick="showDashSection('settings',this)">⚙️ &nbsp;Settings</div>
+        <div class="dash-nav-item" onclick="showDashSection('settings',this)">⚙️ &nbsp;Settings</div>
         <div class="dash-nav-item" onclick="showDashSection('home',this)">🔒 &nbsp;Security</div>
         <div class="dash-nav-item" onclick="showDashSection('home',this)">🤝 &nbsp;Referrals</div>
-        <div class="dash-nav-item" data-dash-nav="profile" onclick="showDashSection('profile',this)">👤 &nbsp;My Profile</div>
+        <div class="dash-nav-item" onclick="showDashSection('profile',this)">👤 &nbsp;My Profile</div>
       </nav>
       <div class="dash-logout">
         <button class="btn btn-outline" style="width:100%;font-size:11px;" onclick="handleLogout()">← Log Out</button>
@@ -582,44 +531,19 @@ footer{border-top:1px solid var(--border);background:var(--bg2);padding:56px 52p
     </aside>
     <main class="dash-content">
       <div class="dash-topbar">
-        <div class="dash-topbar-left">
-          <div style="display:flex;align-items:center;flex-wrap:wrap;gap:10px;">
-            <div class="account-toggle" id="accountModeToggle" title="Switch account view" role="group" aria-label="Account view">
-              <button type="button" id="modeDemoBtn" class="on" onclick="setViewMode('demo')" aria-pressed="true">Demo</button>
-              <button type="button" id="modeRealBtn" onclick="setViewMode('real')" aria-pressed="false">Real</button>
-            </div>
-            <div><div class="dash-greeting" id="dashGreeting">Good morning ✦</div><div class="dash-date" id="dashDate"></div></div>
-          </div>
-          <div class="dash-mode-hint" id="dashModeHint">Viewing <strong>Demo</strong> balances — switch to Real for your stored portfolio.</div>
-        </div>
+        <div><div class="dash-greeting" id="dashGreeting">Good morning ✦</div><div class="dash-date" id="dashDate"></div></div>
         <div class="dash-actions">
-          <button type="button" class="notif">🔔<span class="notif-dot"></span></button>
-          <button type="button" class="btn btn-gold" onclick="goToDeposit()">+ Deposit</button>
+          <button class="notif">🔔<span class="notif-dot"></span></button>
+          <button class="btn btn-gold" onclick="openModal()">+ Deposit</button>
         </div>
       </div>
       <div class="dash-inner">
         <div id="section-home" class="dash-panel-section active">
           <div class="dash-cards">
-            <div class="dash-stat"><div class="label">Total Balance</div><div class="value" id="dashCardBalance">$48,200</div><div class="change up" id="dashCardBalanceSub">Demo portfolio</div></div>
-            <div class="dash-stat"><div class="label">Total Earned</div><div class="value" id="dashCardEarned">$9,840</div><div class="change up" id="dashCardEarnedSub">Lifetime ROI credits</div></div>
-            <div class="dash-stat"><div class="label">Active Plans</div><div class="value" id="dashCardPlans">3</div><div class="change up" id="dashCardPlansSub">Running strategies</div></div>
-            <div class="dash-stat"><div class="label">Level</div><div class="value" id="dashCardLevel">1</div><div class="change" id="dashCardLevelSub" style="color:var(--muted)">Investment tier</div></div>
-          </div>
-          <div class="dash-panel funding-strip">
-            <div class="panel-head"><h3>Deposit · Three networks</h3><span class="panel-tag">BTC · SOL · ETH</span></div>
-            <div class="panel-body">
-              <!-- Major: same deposit story + disclaimer as landing #invest (first interface) -->
-              <div class="dash-deposit-mirror" style="margin-bottom:20px;">
-                <span class="sec-tag">✦ Fund Your Account</span>
-                <h2 class="sec-title" style="font-size:clamp(26px,3.5vw,44px);margin-bottom:10px;">Deposit.<br/>In three<br/>networks.</h2>
-                <p style="color:var(--text2);font-size:13px;line-height:1.85;margin-bottom:8px;">Send your investment to any of our verified cold wallet addresses. Credited within 1–3 network confirmations.</p>
-                <p style="color:var(--text2);font-size:12px;border-left:2px solid var(--gold);padding-left:14px;margin-top:12px;line-height:1.75;">Always verify the wallet address before sending. Include your registered email in the transaction memo where supported.</p>
-              </div>
-              <p style="color:var(--muted);font-size:11px;margin-bottom:14px;line-height:1.6;">Send only the listed asset to each address. Use <strong>Copy Address</strong> to avoid typos.</p>
-              <div class="wallet-card"><div class="wc-top"><div class="wc-ico btc">₿</div><div><div class="wc-lbl">Bitcoin (BTC)</div><div class="wc-net">BTC Network · SegWit</div></div></div><div class="wc-addr"><span data-chain="btc"></span><button type="button" class="copy-btn-txt" onclick="copyWalletAddress('btc',this)">Copy Address</button></div></div>
-              <div class="wallet-card"><div class="wc-top"><div class="wc-ico sol">◎</div><div><div class="wc-lbl">Solana (SOL)</div><div class="wc-net">SOL Network · SPL</div></div></div><div class="wc-addr"><span data-chain="sol"></span><button type="button" class="copy-btn-txt" onclick="copyWalletAddress('sol',this)">Copy Address</button></div></div>
-              <div class="wallet-card"><div class="wc-top"><div class="wc-ico eth">Ξ</div><div><div class="wc-lbl">Ethereum (ETH)</div><div class="wc-net">ETH Network · ERC-20</div></div></div><div class="wc-addr"><span data-chain="eth"></span><button type="button" class="copy-btn-txt" onclick="copyWalletAddress('eth',this)">Copy Address</button></div></div>
-            </div>
+            <div class="dash-stat"><div class="label">Total Balance</div><div class="value">$48,290</div><div class="change up">▲ 12.4% this month</div></div>
+            <div class="dash-stat"><div class="label">Active Investment</div><div class="value">$32,000</div><div class="change up">▲ 3 active plans</div></div>
+            <div class="dash-stat"><div class="label">Total Earnings</div><div class="value">$9,840</div><div class="change up">▲ $1,240 today</div></div>
+            <div class="dash-stat"><div class="label">Referral Bonus</div><div class="value">$620</div><div class="change" style="color:var(--muted)">2 active referrals</div></div>
           </div>
           <div class="dash-grid2">
             <div class="dash-panel">
@@ -655,65 +579,21 @@ footer{border-top:1px solid var(--border);background:var(--bg2);padding:56px 52p
             </tbody></table></div>
           </div>
         </div>
-        <!-- ══ DASHBOARD: Deposit / wallet (dedicated section; addresses synced from JS constant) ══ -->
-        <div id="section-deposit" class="dash-panel-section">
-          <div class="dash-panel">
-            <div class="panel-head"><h3>Deposit · Three networks</h3><span class="panel-tag">BTC · SOL · ETH</span></div>
-            <div class="panel-body">
-              <!-- Major: mirror landing #invest — same headline, copy, and three wallet rows as first interface -->
-              <div class="dash-deposit-mirror" style="margin-bottom:22px;">
-                <span class="sec-tag">✦ Fund Your Account</span>
-                <h2 class="sec-title" style="font-size:clamp(28px,4vw,52px);margin-bottom:12px;">Deposit.<br/>In three<br/>networks.</h2>
-                <p style="color:var(--text2);font-size:13px;line-height:1.85;margin-bottom:8px;">Send your investment to any of our verified cold wallet addresses. Credited within 1–3 network confirmations.</p>
-                <p style="color:var(--text2);font-size:12px;border-left:2px solid var(--gold);padding-left:14px;margin-top:16px;line-height:1.75;">Always verify the wallet address before sending. Include your registered email in the transaction memo where supported.</p>
-              </div>
-              <p id="depositLevelBanner" class="deposit-level-banner" role="status">Sign in to see account tier and deposit policy for your Real portfolio.</p>
-              <div class="wallet-card"><div class="wc-top"><div class="wc-ico btc">₿</div><div><div class="wc-lbl">Bitcoin (BTC)</div><div class="wc-net">BTC Network · SegWit</div></div></div><div class="wc-addr"><span data-chain="btc"></span><button type="button" class="copy-btn-txt" onclick="copyWalletAddress('btc',this)">Copy Address</button></div></div>
-              <div class="wallet-card"><div class="wc-top"><div class="wc-ico sol">◎</div><div><div class="wc-lbl">Solana (SOL)</div><div class="wc-net">SOL Network · SPL</div></div></div><div class="wc-addr"><span data-chain="sol"></span><button type="button" class="copy-btn-txt" onclick="copyWalletAddress('sol',this)">Copy Address</button></div></div>
-              <div class="wallet-card"><div class="wc-top"><div class="wc-ico eth">Ξ</div><div><div class="wc-lbl">Ethereum (ETH)</div><div class="wc-net">ETH Network · ERC-20</div></div></div><div class="wc-addr"><span data-chain="eth"></span><button type="button" class="copy-btn-txt" onclick="copyWalletAddress('eth',this)">Copy Address</button></div></div>
-              <div class="deposit-sim-box" id="depositSimWrap">
-                <h4>Record incoming deposit (simulation)</h4>
-                <p style="color:var(--muted);font-size:11px;line-height:1.65;margin-bottom:12px;">This static demo has no blockchain listener. In <strong>Real</strong> account mode, enter a credited USD amount to update your stored balance and level.</p>
-                <div class="field"><label>Amount (USD)</label><input type="number" id="simDepositAmt" min="1" step="1" placeholder="e.g. 2500"/></div>
-                <button type="button" class="btn btn-gold" style="width:100%;justify-content:center;margin-top:6px;" onclick="simulateIncomingDeposit()">Apply simulated deposit</button>
-                <p class="deposit-sim-note" id="depositSimNote">Switch to <strong>Real</strong> in the top bar to enable. Deposits require <strong>Level 1</strong> (default for new accounts).</p>
-              </div>
-            </div>
-          </div>
-        </div>
         <div id="section-profile" class="dash-panel-section">
           <div class="profile-header">
             <div class="profile-avatar-lg" id="profileAvatarLg">?</div>
-            <div><div class="profile-info-name" id="profileName">—</div><div class="profile-info-email" id="profileEmail">—</div><div class="profile-info-badge" id="profileBadge">Premium Investor</div></div>
+            <div><div class="profile-info-name" id="profileName">—</div><div class="profile-info-email" id="profileEmail">—</div><div class="profile-info-badge">Premium Investor</div></div>
           </div>
           <div class="profile-stats-grid">
-            <div class="profile-stat-card"><div class="psv" id="profCardBal">$48,200</div><div class="psl">Total Balance</div></div>
-            <div class="profile-stat-card"><div class="psv" id="profCardEarn">$9,840</div><div class="psl">Total Earned</div></div>
-            <div class="profile-stat-card"><div class="psv" id="profCardPlans">3</div><div class="psl">Active Plans</div></div>
-          </div>
-          <!-- Major: deposit wallets surfaced on profile (still part of logged-in dashboard) -->
-          <div class="dash-panel" style="margin-bottom:14px;">
-            <div class="panel-head"><h3>Deposit · Three networks</h3><span class="panel-tag">BTC · SOL · ETH</span></div>
-            <div class="panel-body">
-              <!-- Major: same landing #invest copy + three networks as first interface -->
-              <div class="dash-deposit-mirror" style="margin-bottom:18px;">
-                <span class="sec-tag">✦ Fund Your Account</span>
-                <h2 class="sec-title" style="font-size:clamp(24px,3vw,40px);margin-bottom:10px;">Deposit.<br/>In three<br/>networks.</h2>
-                <p style="color:var(--text2);font-size:12px;line-height:1.85;margin-bottom:8px;">Send your investment to any of our verified cold wallet addresses. Credited within 1–3 network confirmations.</p>
-                <p style="color:var(--text2);font-size:11px;border-left:2px solid var(--gold);padding-left:12px;margin-top:10px;line-height:1.75;">Always verify the wallet address before sending. Include your registered email in the transaction memo where supported.</p>
-              </div>
-              <p style="color:var(--muted);font-size:11px;margin-bottom:12px;line-height:1.6;">Use <strong>Copy Address</strong> for each network.</p>
-              <div class="wallet-card"><div class="wc-top"><div class="wc-ico btc">₿</div><div><div class="wc-lbl">Bitcoin (BTC)</div><div class="wc-net">BTC Network · SegWit</div></div></div><div class="wc-addr"><span data-chain="btc"></span><button type="button" class="copy-btn-txt" onclick="copyWalletAddress('btc',this)">Copy Address</button></div></div>
-              <div class="wallet-card"><div class="wc-top"><div class="wc-ico sol">◎</div><div><div class="wc-lbl">Solana (SOL)</div><div class="wc-net">SOL Network · SPL</div></div></div><div class="wc-addr"><span data-chain="sol"></span><button type="button" class="copy-btn-txt" onclick="copyWalletAddress('sol',this)">Copy Address</button></div></div>
-              <div class="wallet-card"><div class="wc-top"><div class="wc-ico eth">Ξ</div><div><div class="wc-lbl">Ethereum (ETH)</div><div class="wc-net">ETH Network · ERC-20</div></div></div><div class="wc-addr"><span data-chain="eth"></span><button type="button" class="copy-btn-txt" onclick="copyWalletAddress('eth',this)">Copy Address</button></div></div>
-              <button type="button" class="btn btn-outline" style="width:100%;margin-top:8px;justify-content:center;" onclick="goToDeposit()">Open full deposit page →</button>
-            </div>
+            <div class="profile-stat-card"><div class="psv">$48,290</div><div class="psl">Total Balance</div></div>
+            <div class="profile-stat-card"><div class="psv">$9,840</div><div class="psl">Total Earned</div></div>
+            <div class="profile-stat-card"><div class="psv">3</div><div class="psl">Active Plans</div></div>
           </div>
           <div class="dash-panel"><div class="panel-head"><h3>Account Information</h3></div><div class="panel-body"><table class="asset-table"><tbody>
             <tr><td style="color:var(--muted);width:160px;">Display Name</td><td id="profileNameRow">—</td></tr>
             <tr><td style="color:var(--muted);">Email</td><td id="profileEmailRow">—</td></tr>
             <tr><td style="color:var(--muted);">Member Since</td><td id="profileJoinedRow">—</td></tr>
-            <tr><td style="color:var(--muted);">Account Tier</td><td style="color:var(--gold);" id="profileTierRow">Level 1</td></tr>
+            <tr><td style="color:var(--muted);">Account Tier</td><td style="color:var(--gold);">Premium Investor</td></tr>
           </tbody></table></div></div>
           <div style="margin-top:14px;"><button class="btn btn-gold" onclick="showDashSection('settings')">⚙️ &nbsp;Settings</button></div>
         </div>
@@ -734,24 +614,9 @@ footer{border-top:1px solid var(--border);background:var(--bg2);padding:56px 52p
               <div class="settings-actions"><button class="btn btn-gold" onclick="saveName()">Save Name</button><span id="saveNameMsg" style="font-size:11px;color:var(--green);display:none;">✓ Saved</span></div>
             </div>
             <div class="settings-section"><h4>Change Password</h4>
-              <div class="field"><label>Current Password</label>
-                <div class="field-pw-row">
-                  <input type="password" id="curPass" placeholder="••••••••" maxlength="128"/>
-                  <button type="button" class="pw-toggle" onclick="togglePwVisibility('curPass',this)" aria-label="Show password">Show</button>
-                </div>
-              </div>
-              <div class="field"><label>New Password</label>
-                <div class="field-pw-row">
-                  <input type="password" id="newPass" placeholder="Min 8 characters" maxlength="128"/>
-                  <button type="button" class="pw-toggle" onclick="togglePwVisibility('newPass',this)" aria-label="Show password">Show</button>
-                </div>
-              </div>
-              <div class="field"><label>Confirm New Password</label>
-                <div class="field-pw-row">
-                  <input type="password" id="confPass" placeholder="Repeat new password" maxlength="128"/>
-                  <button type="button" class="pw-toggle" onclick="togglePwVisibility('confPass',this)" aria-label="Show password">Show</button>
-                </div>
-              </div>
+              <div class="field"><label>Current Password</label><input type="password" id="curPass" placeholder="••••••••"/></div>
+              <div class="field"><label>New Password</label><input type="password" id="newPass" placeholder="Min 6 characters"/></div>
+              <div class="field"><label>Confirm New Password</label><input type="password" id="confPass" placeholder="Repeat new password"/></div>
               <div class="auth-msg" id="passChangeMsg"></div>
               <div class="settings-actions"><button class="btn btn-gold" onclick="changePassword()">Update Password</button></div>
             </div>
@@ -762,10 +627,7 @@ footer{border-top:1px solid var(--border);background:var(--bg2);padding:56px 52p
           </div>
         </div>
         <div id="section-portfolio" class="dash-panel-section">
-          <div class="dash-panel"><div class="panel-head"><h3>Full Portfolio</h3><span class="panel-tag">Live</span></div><div class="panel-body">
-            <!-- Major: consistent Deposit routing from any dashboard area -->
-            <div class="flex flex-wrap gap-2 mb-4"><button type="button" class="btn btn-gold text-[10px] py-2" onclick="goToDeposit()">+ Deposit / Wallets</button></div>
-            <table class="asset-table"><thead><tr><th>Asset</th><th>Holdings</th><th>Avg Buy</th><th>Value</th><th>P&L</th><th>Allocation</th></tr></thead><tbody>
+          <div class="dash-panel"><div class="panel-head"><h3>Full Portfolio</h3><span class="panel-tag">Live</span></div><div class="panel-body"><table class="asset-table"><thead><tr><th>Asset</th><th>Holdings</th><th>Avg Buy</th><th>Value</th><th>P&L</th><th>Allocation</th></tr></thead><tbody>
             <tr><td><div class="asset-name"><div class="asset-avatar" style="background:rgba(247,147,26,.15);color:#F7931A;">₿</div>Bitcoin</div></td><td>0.428 BTC</td><td>$58,200</td><td>$27,340</td><td class="up">+$2,240</td><td>56.6%</td></tr>
             <tr><td><div class="asset-name"><div class="asset-avatar" style="background:rgba(98,126,234,.15);color:#627EEA;">Ξ</div>Ethereum</div></td><td>4.12 ETH</td><td>$2,800</td><td>$12,650</td><td class="up">+$1,114</td><td>26.2%</td></tr>
             <tr><td><div class="asset-name"><div class="asset-avatar" style="background:rgba(153,69,255,.15);color:#9945FF;">◎</div>Solana</div></td><td>64.8 SOL</td><td>$134</td><td>$8,300</td><td class="dn">-$379</td><td>17.2%</td></tr>
@@ -785,8 +647,6 @@ footer{border-top:1px solid var(--border);background:var(--bg2);padding:56px 52p
       <li><a href="#features">Features</a></li>
       <li><a href="#plans">Plans</a></li>
       <li><a href="#invest">Invest</a></li>
-      <!-- Major: global Deposit → public wallet strip when logged out; dashboard deposit when logged in -->
-      <li><a href="#" onclick="event.preventDefault();goToDeposit();">Deposit</a></li>
     </ul>
     <div class="nav-live"><span class="dot"></span>Live Markets</div>
     <div class="nav-actions">
@@ -803,8 +663,6 @@ footer{border-top:1px solid var(--border);background:var(--bg2);padding:56px 52p
       <div class="hero-cta">
         <button class="btn btn-gold" onclick="openModal('register')">Start Investing →</button>
         <button class="btn btn-outline" onclick="openModal('login')">View Dashboard</button>
-        <!-- Major: hero Deposit → same public or in-dashboard wallet flow -->
-        <button class="btn btn-outline" onclick="goToDeposit()">Deposit</button>
       </div>
       <div class="hero-stats">
         <div class="hs"><div class="hs-lbl">Assets Under Mgmt</div><div class="hs-val">$2.4B+</div><div class="hs-chg">▲ Growing daily</div></div>
@@ -928,7 +786,7 @@ footer{border-top:1px solid var(--border);background:var(--bg2);padding:56px 52p
         <div class="lr-cell"><div class="lv-ret-val">$10,000 – $24,999</div><div class="lv-ret-sub">21-day term · Premium</div><div class="lv-prog"><div class="prog-track"><div class="prog-fill" style="width:60%"></div></div></div></div>
         <div class="lr-cell"><div class="lv-ret-val hi">~$2,000–$5,000</div><div class="lv-ret-sub">On $10K–$25K invested</div></div>
         <div class="lr-cell"><div class="lv-features"><div class="lv-feat">Daily compounding</div><div class="lv-feat">Dedicated account mgr</div><div class="lv-feat">DeFi access</div><div class="lv-feat">Withdrawal in 24h</div></div></div>
-        <div class="lr-cta"><button class="btn btn-gold" style="font-size:10px;padding:8px 16px;" onclick="if(getSession())goToDeposit();else openModal('register');">Invest Now</button></div>
+        <div class="lr-cta"><button class="btn btn-gold" style="font-size:10px;padding:8px 16px;" onclick="openModal('register')">Invest Now</button></div>
       </div>
       <div class="level-row">
         <div class="lr-cell"><div class="lv-name"><span class="lv-badge lv4b">Level 4</span><span class="lv-title">Quantum Elite</span><span class="lv-range">High performance</span></div></div>
@@ -986,10 +844,10 @@ footer{border-top:1px solid var(--border);background:var(--bg2);padding:56px 52p
         <h2 class="sec-title">Deposit.<br/>In three<br/>networks.</h2>
         <p style="color:var(--text2);font-size:13px;line-height:1.85;margin-bottom:8px;">Send your investment to any of our verified cold wallet addresses. Credited within 1–3 network confirmations.</p>
         <p style="color:var(--text2);font-size:12px;border-left:2px solid var(--gold);padding-left:14px;margin-top:20px;line-height:1.75;">Always verify the wallet address before sending. Include your registered email in the transaction memo where supported.</p>
-        <div id="public-deposit-wallets" style="margin-top:28px;">
-        <div class="wallet-card"><div class="wc-top"><div class="wc-ico btc">₿</div><div><div class="wc-lbl">Bitcoin (BTC)</div><div class="wc-net">BTC Network · SegWit</div></div></div><div class="wc-addr"><span data-chain="btc"></span><button type="button" class="copy-btn-txt" onclick="copyWalletAddress('btc',this)">Copy Address</button></div></div>
-          <div class="wallet-card"><div class="wc-top"><div class="wc-ico sol">◎</div><div><div class="wc-lbl">Solana (SOL)</div><div class="wc-net">SOL Network · SPL</div></div></div><div class="wc-addr"><span data-chain="sol"></span><button type="button" class="copy-btn-txt" onclick="copyWalletAddress('sol',this)">Copy Address</button></div></div>
-          <div class="wallet-card"><div class="wc-top"><div class="wc-ico eth">Ξ</div><div><div class="wc-lbl">Ethereum (ETH)</div><div class="wc-net">ETH Network · ERC-20</div></div></div><div class="wc-addr"><span data-chain="eth"></span><button type="button" class="copy-btn-txt" onclick="copyWalletAddress('eth',this)">Copy Address</button></div></div>
+        <div style="margin-top:28px;">
+          <div class="wallet-card"><div class="wc-top"><div class="wc-ico btc">₿</div><div><div class="wc-lbl">Bitcoin</div><div class="wc-net">BTC Network · SegWit</div></div></div><div class="wc-addr"><span id="btcAddr">bc1qtr8p906krqga3ucgmyxcfmkzd42v9sjmla7fs4</span><button class="copy-btn" onclick="copyAddr('btcAddr',this)">⧉</button></div></div>
+          <div class="wallet-card"><div class="wc-top"><div class="wc-ico eth">Ξ</div><div><div class="wc-lbl">Ethereum</div><div class="wc-net">ETH Network · ERC-20</div></div></div><div class="wc-addr"><span id="ethAddr">0xb424C17599B73Dd70e02a6E00E7a46B0E18cF62d</span><button class="copy-btn" onclick="copyAddr('ethAddr',this)">⧉</button></div></div>
+          <div class="wallet-card"><div class="wc-top"><div class="wc-ico sol">◎</div><div><div class="wc-lbl">Solana</div><div class="wc-net">SOL Network · SPL</div></div></div><div class="wc-addr"><span id="solAddr">53cV9QGEWTZXXTZoYeeZWFJJDmJJvoFgM3CVP5fnQYhm</span><button class="copy-btn" onclick="copyAddr('solAddr',this)">⧉</button></div></div>
         </div>
       </div>
       <div class="calc-form reveal">
@@ -1023,11 +881,7 @@ footer{border-top:1px solid var(--border);background:var(--bg2);padding:56px 52p
           <div class="ret-row"><span class="rk">Projected Annual</span><span class="rv" id="annual">$13,000.00</span></div>
           <div class="ret-row"><span class="rk">Total with Principal</span><span class="rv" id="total">$18,000.00</span></div>
         </div>
-        <div class="flex flex-col gap-2 sm:flex-row sm:items-stretch">
-          <button type="button" class="submit-btn flex-1" onclick="openModal('register')">Open Investment Account →</button>
-          <!-- Major: secondary path to dedicated wallet / deposit UI -->
-          <button type="button" class="btn btn-outline w-full sm:w-auto shrink-0 justify-center px-5 py-3 uppercase tracking-wider text-[11px]" onclick="goToDeposit()">Deposit →</button>
-        </div>
+        <button class="submit-btn" onclick="openModal('register')">Open Investment Account →</button>
       </div>
     </div>
   </section>
@@ -1039,7 +893,7 @@ footer{border-top:1px solid var(--border);background:var(--bg2);padding:56px 52p
         <p>Next-generation cryptocurrency investment platform offering institutional-grade returns with full transparency, security, and on-chain verification.</p>
         <div style="margin-top:18px;"><div style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:5px;">Contact Support</div><a href="mailto:realtybluepeak01@gmail.com" style="color:var(--gold);font-size:12px;text-decoration:none;">realtybluepeak01@gmail.com</a></div>
       </div>
-      <div class="ft-col"><h4>Platform</h4><a href="#" onclick="event.preventDefault();goToDeposit();">Deposit</a><a href="#" onclick="event.preventDefault();openDashboardOrLogin();">Dashboard</a><a href="#plans" onclick="event.preventDefault();document.getElementById('plans').scrollIntoView({behavior:'smooth'});">Investment Plans</a><a href="#invest" onclick="event.preventDefault();document.getElementById('invest').scrollIntoView({behavior:'smooth'});">Markets</a><a href="#">Referrals</a></div>
+      <div class="ft-col"><h4>Platform</h4><a href="#">Dashboard</a><a href="#">Investment Plans</a><a href="#">Markets</a><a href="#">Referrals</a></div>
       <div class="ft-col"><h4>Company</h4><a href="#">About Us</a><a href="#">Security</a><a href="#">Blog</a><a href="#">Careers</a></div>
       <div class="ft-col"><h4>Support</h4><a href="#">Help Center</a><a href="#">Terms of Service</a><a href="#">Privacy Policy</a><a href="mailto:realtybluepeak01@gmail.com">Contact Us</a></div>
     </div>
@@ -1051,386 +905,45 @@ footer{border-top:1px solid var(--border);background:var(--bg2);padding:56px 52p
 </div>
 
 <script>
-/* ═══ AscendFi app logic: wallets, demo/real shell, PBKDF2 auth, rate limits (major refactor) ═══
- * SECURITY NOTE: PBKDF2 here only protects localStorage from casual inspection. Production must
- * authenticate on the server, re-hash with a server-side pepper, rate-limit by IP, and never trust client claims.
- */
-
-const USERS_KEY='ascendfi_users', SESSION_KEY='ascendfi_session', VIEW_MODE_KEY='ascendfi_view_mode';
-const LOGIN_ATTEMPT_PREFIX='ascendfi_la_';
-const MAX_LOGIN_FAILS=5, LOGIN_WINDOW_MS=15*60*1000;
-const PBKDF2_ITERS=120000;
-
-/** Verified cold-wallet addresses — single source for landing + dashboard */
-const WALLET_ADDRESSES={btc:'bc1qtr8p906krqga3ucgmyxcfmkzd42v9sjmla7fs4',eth:'0xb424C17599B73Dd70e02a6E00E7a46B0E18cF62d',sol:'53cV9QGEWTZXXTZoYeeZWFJJDmJJvoFgM3CVP5fnQYhm'};
-
-const DEMO_STATS={balance:48200,totalEarned:9840,activePlans:3,level:1};
-
-function handleLogout(){
-function sessionRemember(s){
-  if(!s)return false;
-  return Object.prototype.hasOwnProperty.call(s,'rememberMe')?!!s.rememberMe:true;
-}
-
+// ── AUTH ──
+const USERS_KEY='ascendfi_users', SESSION_KEY='ascendfi_session';
 const getUsers=()=>JSON.parse(localStorage.getItem(USERS_KEY)||'{}');
 const saveUsers=u=>localStorage.setItem(USERS_KEY,JSON.stringify(u));
+const getSession=()=>JSON.parse(localStorage.getItem(SESSION_KEY)||'null');
+const setSession=u=>localStorage.setItem(SESSION_KEY,JSON.stringify(u));
+const clearSession=()=>localStorage.removeItem(SESSION_KEY);
 
-function readSessionRaw(){return sessionStorage.getItem(SESSION_KEY)||localStorage.getItem(SESSION_KEY);}
-function getSession(){try{const r=readSessionRaw();if(!r)return null;const o=JSON.parse(r);delete o.password;delete o.passwordHash;delete o.passwordSalt;return o;}catch{return null;}}
-function setSessionRecord(data,rememberOverride){
-  const remember=rememberOverride!==undefined?rememberOverride:!!data.rememberMe;
-  const payload={...data,rememberMe:remember};
-  const json=JSON.stringify(payload);
-  if(remember){localStorage.setItem(SESSION_KEY,json);sessionStorage.removeItem(SESSION_KEY);}
-  else{sessionStorage.setItem(SESSION_KEY,json);localStorage.removeItem(SESSION_KEY);}
-}
-function clearSession(){sessionStorage.removeItem(SESSION_KEY);localStorage.removeItem(SESSION_KEY);}
+function showMsg(id,txt,type){const e=document.getElementById(id);e.textContent=txt;e.className='auth-msg '+type;e.style.display='block';}
+function hideMsg(id){document.getElementById(id).style.display='none';}
 
-function defaultRealAccount(){return{balance:0,totalEarned:0,activePlans:0,totalDeposited:0,level:1};}
-function normalizeRealAccount(ra){
-  const o=ra&&typeof ra==='object'?ra:{};
-  const totalDeposited=Number(o.totalDeposited)||0;
-  // Major: tier always follows cumulative deposits so balance/level stay consistent after reload.
-  return{
-    balance:Number(o.balance)||0,
-    totalEarned:Number(o.totalEarned)||0,
-    activePlans:Number(o.activePlans)||0,
-    totalDeposited,
-    level:computeLevel(totalDeposited)
-  };
-}
-/** Tier thresholds from the public plans table in this page */
-function computeLevel(totalDeposited){
-  const t=Number(totalDeposited)||0;
-  if(t<5000)return 1;
-  if(t<10000)return 2;
-  if(t<25000)return 3;
-  if(t<50000)return 4;
-  return 5;
-}
-
-function getViewMode(){return sessionStorage.getItem(VIEW_MODE_KEY)==='real'?'real':'demo';}
-function setViewMode(mode){
-  sessionStorage.setItem(VIEW_MODE_KEY,mode==='real'?'real':'demo');
-  refreshAccountShell();
-}
-
-function buildSessionPayload(userRow,opts){
-  opts=opts||{};
-  return{
-    name:userRow.name,
-    email:userRow.email,
-    joined:userRow.joined,
-    avatar:userRow.avatar||null,
-    realAccount:normalizeRealAccount(userRow.realAccount),
-    rememberMe:!!opts.rememberMe
-  };
-}
-
-function bufToB64(buf){
-  const bytes=new Uint8Array(buf);
-  let s='';
-  for(let i=0;i<bytes.byteLength;i++)s+=String.fromCharCode(bytes[i]);
-  return btoa(s);
-}
-/** Client-side PBKDF2 — mitigates casual storage snooping only; production auth must be server-side */
-async function deriveHash(password,saltB64){
-  const enc=new TextEncoder();
-  const saltBin=Uint8Array.from(atob(saltB64),c=>c.charCodeAt(0));
-  const keyMaterial=await crypto.subtle.importKey('raw',enc.encode(password),'PBKDF2',false,['deriveBits']);
-  const bits=await crypto.subtle.deriveBits({name:'PBKDF2',salt:saltBin,iterations:PBKDF2_ITERS,hash:'SHA-256'},keyMaterial,256);
-  return bufToB64(bits);
-}
-async function hashPassword(plain){
-  const salt=crypto.getRandomValues(new Uint8Array(16));
-  const saltB64=btoa(String.fromCharCode(...salt));
-  const hashB64=await deriveHash(plain,saltB64);
-  return{saltB64,hashB64};
-}
-async function verifyPassword(plain,saltB64,hashB64){return(await deriveHash(plain,saltB64))===hashB64;}
-async function verifyStoredPassword(userRow,plain){
-  if(!userRow)return false;
-  if(userRow.passwordHash&&userRow.passwordSalt)return verifyPassword(plain,userRow.passwordSalt,userRow.passwordHash);
-  if(typeof userRow.password==='string')return userRow.password===plain;
-  return false;
-}
-async function ensurePasswordMigrated(email,plain,user){
-  if(user.passwordHash)return;
-  if(typeof user.password==='string'&&user.password===plain){
-    const h=await hashPassword(plain);
-    const users=getUsers();
-    users[email].passwordSalt=h.saltB64;
-    users[email].passwordHash=h.hashB64;
-    delete users[email].password;
-    saveUsers(users);
-  }
-}
-
-function loginFailKey(email){return LOGIN_ATTEMPT_PREFIX+email.toLowerCase();}
-/** Rate-limit: returns minutes remaining while lock active (major: clearer UX than generic “later”). */
-function getLoginLockState(email){
-  try{
-    const o=JSON.parse(localStorage.getItem(loginFailKey(email))||'{}');
-    if(o.lockedUntil&&Date.now()<o.lockedUntil){
-      const ms=o.lockedUntil-Date.now();
-      const minutes=Math.max(1,Math.ceil(ms/60000));
-      return{locked:true,minutes};
-    }
-  }catch{}
-  return{locked:false,minutes:0};
-}
-function isLoginLocked(email){return getLoginLockState(email).locked;}
-function recordLoginFail(email){
-  const k=loginFailKey(email);
-  let o={count:0,firstAt:Date.now(),lockedUntil:0};
-  try{const p=JSON.parse(localStorage.getItem(k)||'{}');o={...o,...p};}catch{}
-  const now=Date.now();
-  if(o.lockedUntil&&now<o.lockedUntil)return;
-  if(now-o.firstAt>LOGIN_WINDOW_MS)o={count:0,firstAt:now,lockedUntil:0};
-  o.count++;
-  if(o.count>=MAX_LOGIN_FAILS)o.lockedUntil=now+LOGIN_WINDOW_MS;
-  localStorage.setItem(k,JSON.stringify(o));
-}
-function clearLoginFails(email){localStorage.removeItem(loginFailKey(email));}
-
-const EMAIL_RE=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-function validEmail(e){return typeof e==='string'&&e.length<=120&&EMAIL_RE.test(e);}
-function sanitizeName(n){return n.replace(/<[^>]*>/g,'').trim().slice(0,80);}
-/** Strip characters that should never appear in an email field (XSS / log injection hardening on this client). */
-function sanitizeEmailInput(v){return String(v||'').replace(/[<>'"&]/g,'').trim().toLowerCase().slice(0,120);}
-
-function showMsg(id,txt,type){const el=document.getElementById(id);if(!el)return;el.textContent=txt;el.className='auth-msg '+type;el.style.display='block';}
-function hideMsg(id){const el=document.getElementById(id);if(el)el.style.display='none';}
-
-let _toastTimer=null;
-function showToast(kind,text){
-  const host=document.getElementById('toastHost');if(!host)return;
-  host.innerHTML='';
-  const el=document.createElement('div');
-  el.className='app-toast'+(kind==='success'?' success':'');
-  el.textContent=text;
-  host.appendChild(el);
-  clearTimeout(_toastTimer);
-  _toastTimer=setTimeout(()=>{host.innerHTML='';},2600);
-}
-
-function populateWalletAddresses(){
-  document.querySelectorAll('[data-chain]').forEach(span=>{
-    const c=span.getAttribute('data-chain');
-    if(WALLET_ADDRESSES[c])span.textContent=WALLET_ADDRESSES[c];
-  });
-}
-
-function copyWalletAddress(chain,btn){
-  const addr=WALLET_ADDRESSES[chain];if(!addr)return;
-  const label=chain.toUpperCase();
-  navigator.clipboard.writeText(addr).then(()=>{
-    showToast('success',label+' — address copied successfully');
-    const o=btn.textContent;
-    btn.textContent='Copied';
-    btn.style.color='var(--green)';
-    setTimeout(()=>{btn.textContent=o;btn.style.color='';},2000);
-  }).catch(()=>showToast('','Could not copy — select the address manually.'));
-}
-
-function togglePwVisibility(inputId,btn){
-  const inp=document.getElementById(inputId);if(!inp)return;
-  if(inp.type==='password'){inp.type='text';btn.textContent='Hide';}
-  else{inp.type='password';btn.textContent='Show';}
-}
-
-function formatUsd(n){
-  return '$'+Number(n).toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:0});
-}
-
-/** Demo vs Real: updates dashboard + profile headline stats */
-function refreshAccountShell(){
-  const mode=getViewMode();
-  const demo=mode==='demo';
-  const s=getSession();
-  document.getElementById('modeDemoBtn').classList.toggle('on',demo);
-  document.getElementById('modeRealBtn').classList.toggle('on',!demo);
-  document.getElementById('modeDemoBtn').setAttribute('aria-pressed',demo?'true':'false');
-  document.getElementById('modeRealBtn').setAttribute('aria-pressed',!demo?'true':'false');
-  const hint=document.getElementById('dashModeHint');
-  if(demo)hint.innerHTML='Viewing <strong>Demo</strong> balances — illustrative only. Switch to <strong>Real</strong> for your stored portfolio.';
-  else hint.innerHTML='Viewing <strong>Real</strong> account data stored on this device.';
-  document.getElementById('sidebarRole').textContent=demo?'Demo view':'Real account';
-  const stats=demo?DEMO_STATS:(s&&s.realAccount?normalizeRealAccount(s.realAccount):defaultRealAccount());
-  document.getElementById('dashCardBalance').textContent=formatUsd(stats.balance);
-  document.getElementById('dashCardBalanceSub').textContent=demo?'Demo portfolio':'Your credited balance';
-  document.getElementById('dashCardEarned').textContent=formatUsd(stats.totalEarned);
-  document.getElementById('dashCardEarnedSub').textContent=demo?'Sample ROI credits':'Lifetime ROI credits';
-  document.getElementById('dashCardPlans').textContent=String(stats.activePlans);
-  document.getElementById('dashCardPlansSub').textContent=demo?'Running strategies':'Active strategies';
-  document.getElementById('dashCardLevel').textContent=String(stats.level);
-  document.getElementById('dashCardLevelSub').textContent='Investment tier';
-  document.getElementById('profCardBal').textContent=formatUsd(stats.balance);
-  document.getElementById('profCardEarn').textContent=formatUsd(stats.totalEarned);
-  document.getElementById('profCardPlans').textContent=String(stats.activePlans);
-  document.getElementById('profileTierRow').textContent='Level '+stats.level;
-  document.getElementById('profileBadge').textContent=demo?'Demo account':'Real account';
-  const depBanner=document.getElementById('depositLevelBanner');
-  if(depBanner){
-    if(demo)depBanner.textContent='Demo mode: addresses below are live deposit targets. Switch to Real to simulate a credited deposit; new Real accounts start at Level 1 before their first posted balance.';
-    else{
-      const ra=s&&s.realAccount?normalizeRealAccount(s.realAccount):defaultRealAccount();
-      depBanner.textContent='Real account — Investment tier Level '+ra.level+'. All users begin at Level 1; cumulative credited deposits advance tier and update this level automatically.';
-    }
-  }
-  const sim=document.getElementById('depositSimWrap');
-  if(sim){
-    sim.style.opacity=demo?'0.5':'1';
-    sim.style.pointerEvents=demo?'none':'auto';
-    document.getElementById('depositSimNote').innerHTML=demo
-      ?'Switch to <strong>Real</strong> in the top bar to record a simulated deposit.'
-      :'Each simulated credit increases balance and <strong>total deposited</strong>; level follows the tier table. Active plans increase by 1 per deposit (max 3).';
-  }
-}
-
-/**
- * Logged-out Deposit: show public BTC / SOL / ETH addresses (same keys as dashboard) — do not force login.
- * Logged-in: open dashboard deposit section.
- */
-function showPublicDepositWallets(){
-  closeModal();
-  const dash=document.getElementById('dashPage');
-  if(dash)dash.classList.remove('active');
-  const main=document.getElementById('mainPage');
-  if(main)main.style.display='block';
-  populateWalletAddresses();
-  const anchor=document.getElementById('public-deposit-wallets')||document.getElementById('invest');
-  if(anchor){
-    requestAnimationFrame(()=>{
-      anchor.scrollIntoView({behavior:'smooth',block:'center'});
-      anchor.classList.add('deposit-scrollflash');
-      setTimeout(()=>anchor.classList.remove('deposit-scrollflash'),2200);
-    });
-  }
-  showToast('success','Verified BTC, SOL, and ETH addresses below — use Copy Address for each.');
-}
-
-/** After login / sidebar: route to wallet or home */
-function goToDeposit(navEl){
-  let s=getSession();
-  if(!s){showPublicDepositWallets();return;}
-  const dash=document.getElementById('dashPage');
-  if(!dash.classList.contains('active'))openDashboard();
-  s=getSession();
-  if(!s){showPublicDepositWallets();return;}
-  const el=navEl||document.querySelector('[data-dash-nav="deposit"]');
-  showDashSection('deposit',el);
-  requestAnimationFrame(()=>{
-    const sec=document.getElementById('section-deposit');
-    if(sec)sec.scrollIntoView({behavior:'smooth',block:'start'});
-  });
-}
-/** Footer / marketing: open dashboard when session exists, otherwise auth modal */
-function openDashboardOrLogin(){
-  if(getSession())openDashboard();
-  else openModal('login');
-}
-
-/**
- * Real-only deposit simulator: +balance, +totalDeposited, level=computeLevel(totalDeposited),
- * activePlans += 1 capped at 3 (simple stand-in for plan activation).
- */
-function simulateIncomingDeposit(){
-  if(getViewMode()==='demo'){showToast('','Switch to Real account to simulate a deposit.');return;}
-  const s=getSession();if(!s)return;
-  const amt=Math.floor(Number(document.getElementById('simDepositAmt').value)||0);
-  if(amt<1){showToast('','Enter a valid USD amount (minimum 1).');return;}
-  const users=getUsers();
-  const row=users[s.email];if(!row)return;
-  const ra=normalizeRealAccount(row.realAccount);
-  // Level for $0 deposited is always Tier 1 (normalizeRealAccount + computeLevel). Additional deposits update level from cumulative credited USD.
-  ra.balance+=amt;
-  ra.totalDeposited+=amt;
-  ra.level=computeLevel(ra.totalDeposited);
-  ra.activePlans=Math.min(3,(ra.activePlans||0)+1);
-  row.realAccount=ra;
-  saveUsers(users);
-  const rem=sessionRemember(s);
-  setSessionRecord(buildSessionPayload(row,{rememberMe:rem}),rem);
-  document.getElementById('simDepositAmt').value='';
-  refreshAccountShell();
-  showToast('success','Deposit recorded — balance and level updated.');
-}
-
-async function handleRegister(){
-  hideMsg('registerMsg');
-  const name=sanitizeName(document.getElementById('regName').value);
-  const email=sanitizeEmailInput(document.getElementById('regEmail').value);
-  if(document.getElementById('regEmail').value)document.getElementById('regEmail').value=email;
-  if(!email)return showMsg('registerMsg','Please enter your email.','error');
+function handleRegister(){
+  const name=document.getElementById('regName').value.trim();
+  const email=document.getElementById('regEmail').value.trim().toLowerCase();
   const pass=document.getElementById('regPass').value;
-  const btn=document.getElementById('registerSubmitBtn');
   if(!name)return showMsg('registerMsg','Please enter your name.','error');
-  if(!validEmail(email))return showMsg('registerMsg','Please enter a valid email.','error');
-  if(pass.length<8)return showMsg('registerMsg','Password must be at least 8 characters.','error');
+  if(!email||!/\S+@\S+\.\S+/.test(email))return showMsg('registerMsg','Please enter a valid email.','error');
+  if(pass.length<6)return showMsg('registerMsg','Password must be at least 6 characters.','error');
   const users=getUsers();
   if(users[email])return showMsg('registerMsg','Account already exists. Please log in.','error');
-  btn.disabled=true;btn.classList.add('loading');
-  try{
-    const h=await hashPassword(pass);
-    users[email]={
-      name,email,joined:new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'}),
-      avatar:null,passwordSalt:h.saltB64,passwordHash:h.hashB64,realAccount:defaultRealAccount()
-    };
-    saveUsers(users);
-    const remember=document.getElementById('regRemember').checked;
-    try{sessionStorage.removeItem(VIEW_MODE_KEY);}catch(e){}
-    setSessionRecord(buildSessionPayload(users[email],{rememberMe:remember}),remember);
-    showMsg('registerMsg','Account created! Opening dashboard…','success');
-    setTimeout(()=>{closeModal();openDashboard();},700);
-  }finally{btn.disabled=false;btn.classList.remove('loading');}
+  users[email]={name,email,password:pass,joined:new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'}),avatar:null};
+  saveUsers(users);setSession(users[email]);
+  showMsg('registerMsg','Account created! Opening dashboard…','success');
+  setTimeout(()=>{closeModal();openDashboard();},700);
 }
 
-async function handleLogin(){
-  hideMsg('loginMsg');
-  const email=sanitizeEmailInput(document.getElementById('loginEmail').value);
-  if(document.getElementById('loginEmail').value)document.getElementById('loginEmail').value=email;
+function handleLogin(){
+  const email=document.getElementById('loginEmail').value.trim().toLowerCase();
   const pass=document.getElementById('loginPass').value;
-  const btn=document.getElementById('loginSubmitBtn');
   if(!email)return showMsg('loginMsg','Please enter your email.','error');
-  if(!validEmail(email))return showMsg('loginMsg','Please enter a valid email.','error');
   if(!pass)return showMsg('loginMsg','Please enter your password.','error');
-  if(pass.length<8)return showMsg('loginMsg','Password must be at least 8 characters.','error');
-  const lockSt=getLoginLockState(email);
-  if(lockSt.locked)return showMsg('loginMsg','Too many attempts, try again in about '+lockSt.minutes+' minute'+(lockSt.minutes===1?'':'s')+'.','error');
-  btn.disabled=true;btn.classList.add('loading');
-  const t0=Date.now();
-  try{
-    const users=getUsers();
-    const user=users[email];
-    const ok=await verifyStoredPassword(user,pass);
-    if(!user||!ok){
-      recordLoginFail(email);
-      return showMsg('loginMsg','Invalid credentials','error');
-    }
-    clearLoginFails(email);
-    await ensurePasswordMigrated(email,pass,user);
-    const fresh=getUsers()[email];
-    const remember=document.getElementById('loginRemember').checked;
-    // Major: each successful login opens on Demo account first; user switches to Real when ready.
-    try{sessionStorage.removeItem(VIEW_MODE_KEY);}catch(e){}
-    setSessionRecord(buildSessionPayload(fresh,{rememberMe:remember}),remember);
-    showMsg('loginMsg','Login successful! Opening dashboard…','success');
-    setTimeout(()=>{closeModal();openDashboard();},600);
-  }finally{
-    const minMs=480;
-    await new Promise(r=>setTimeout(r,Math.max(0,minMs-(Date.now()-t0))));
-    btn.disabled=false;
-    btn.classList.remove('loading');
-  }
+  const users=getUsers();const user=users[email];
+  if(!user)return showMsg('loginMsg','No account found. Please register.','error');
+  if(user.password!==pass)return showMsg('loginMsg','Incorrect password.','error');
+  setSession(user);showMsg('loginMsg','Login successful! Opening dashboard…','success');
+  setTimeout(()=>{closeModal();openDashboard();},600);
 }
 
-function handleLogout(){
-  clearSession();
-  // Major: next visit after logout defaults to Demo view (spec: demo-first portfolio presentation).
-  try{sessionStorage.removeItem(VIEW_MODE_KEY);}catch(e){}
-  closeDashboard();
-}
+function handleLogout(){clearSession();closeDashboard();}
 
 function openModal(tab='login'){
   hideMsg('loginMsg');hideMsg('registerMsg');
@@ -1453,100 +966,124 @@ function switchTab(tab,el){
 }
 document.getElementById('authModal').addEventListener('click',function(e){if(e.target===this)closeModal();});
 
-let _fpEmail='';
+// ══════════════════════════════════════
+// ── FORGOT PASSWORD LOGIC ──
+// ══════════════════════════════════════
+let _fpEmail = '';   // email found in step 1
 
 function openForgotPassword(){
   closeModal();
+  // reset state
   _fpEmail='';
   document.getElementById('fpEmail').value='';
-  hideMsg('fpMsg1');hideMsg('fpMsg2');
+  hideMsg('fpMsg1'); hideMsg('fpMsg2');
   document.getElementById('fpNewPass').value='';
   document.getElementById('fpConfPass').value='';
+  // go to step 1
   goFpPanel(1);
+  switchFpTab('view');
+  // open overlay
   const ov=document.getElementById('fpOverlay');
   ov.style.display='flex';
   setTimeout(()=>ov.classList.add('open'),10);
   setTimeout(()=>document.getElementById('fpEmail').focus(),350);
 }
+
 function closeForgotPassword(){
   const ov=document.getElementById('fpOverlay');
   ov.classList.remove('open');
   setTimeout(()=>ov.style.display='none',300);
 }
-document.getElementById('fpOverlay').addEventListener('click',function(e){if(e.target===this)closeForgotPassword();});
+
+document.getElementById('fpOverlay').addEventListener('click',function(e){
+  if(e.target===this)closeForgotPassword();
+});
 
 function goFpPanel(n){
-  document.querySelectorAll('.fp-panel').forEach((p,i)=>{p.classList.toggle('active',i===n-1);});
+  // Update panels
+  document.querySelectorAll('.fp-panel').forEach((p,i)=>{
+    p.classList.toggle('active', i===n-1);
+  });
+  // Update step indicators
   for(let i=1;i<=3;i++){
     const ind=document.getElementById('fpStep'+i+'Ind');
     ind.classList.remove('active','done');
-    if(i<n)ind.classList.add('done');
-    else if(i===n)ind.classList.add('active');
+    if(i<n) ind.classList.add('done');
+    else if(i===n) ind.classList.add('active');
   }
 }
 
 function fpStep1Next(){
   const email=document.getElementById('fpEmail').value.trim().toLowerCase();
-  if(!validEmail(email))return showMsg('fpMsg1','Please enter a valid email address.','error');
-  const users=getUsers();
-  hideMsg('fpMsg1');
-  if(!users[email]){
-    return showMsg('fpMsg1','If an account exists for this address on this device, use the next step to set a new password. (This demo cannot send email.)','info');
+  if(!email||!/\S+@\S+\.\S+/.test(email)){
+    return showMsg('fpMsg1','Please enter a valid email address.','error');
   }
+  const users=getUsers();
+  if(!users[email]){
+    return showMsg('fpMsg1','No account found with this email address.','error');
+  }
+  // Account found
   _fpEmail=email;
+  // Show password in view tab
+  document.getElementById('fpRevealedPass').textContent=users[email].password;
+  hideMsg('fpMsg1');
   goFpPanel(2);
 }
 
-async function fpResetPassword(){
-  if(!_fpEmail)return showMsg('fpMsg2','Unable to complete request.','error');
+function switchFpTab(tab){
+  document.getElementById('fpViewPanel').style.display = tab==='view'?'block':'none';
+  document.getElementById('fpResetPanel').style.display = tab==='reset'?'block':'none';
+  document.getElementById('fpTab1').classList.toggle('active', tab==='view');
+  document.getElementById('fpTab2').classList.toggle('active', tab==='reset');
+  hideMsg('fpMsg2');
+}
+
+function copyRecoveredPass(){
+  const pass=document.getElementById('fpRevealedPass').textContent;
+  navigator.clipboard.writeText(pass).then(()=>{
+    const btn=document.getElementById('fpCopyBtn');
+    btn.textContent='✓'; btn.style.color='var(--green)';
+    setTimeout(()=>{btn.textContent='⧉'; btn.style.color='';},2000);
+  });
+}
+
+function fpResetPassword(){
   const nw=document.getElementById('fpNewPass').value;
   const conf=document.getElementById('fpConfPass').value;
-  if(nw.length<8)return showMsg('fpMsg2','Password must be at least 8 characters.','error');
-  if(nw!==conf)return showMsg('fpMsg2','Passwords do not match.','error');
+  if(nw.length<6) return showMsg('fpMsg2','New password must be at least 6 characters.','error');
+  if(nw!==conf) return showMsg('fpMsg2','Passwords do not match.','error');
+  // Update stored password
   const users=getUsers();
-  if(!users[_fpEmail])return showMsg('fpMsg2','Unable to complete request.','error');
-  const h=await hashPassword(nw);
-  users[_fpEmail].passwordSalt=h.saltB64;
-  users[_fpEmail].passwordHash=h.hashB64;
-  delete users[_fpEmail].password;
+  users[_fpEmail].password=nw;
   saveUsers(users);
+  // Update session if same user is logged in
   const sess=getSession();
-  if(sess&&sess.email===_fpEmail){
-    const rem=sessionRemember(sess);
-    setSessionRecord(buildSessionPayload(users[_fpEmail],{rememberMe:rem}),rem);
-  }
+  if(sess&&sess.email===_fpEmail){sess.password=nw;setSession(sess);}
+  // Go to success step
   document.getElementById('fpSuccessTitle').textContent='Password Reset!';
-  document.getElementById('fpSuccessMsg').textContent='Your password has been updated. You can now log in.';
+  document.getElementById('fpSuccessMsg').textContent='Your password has been updated successfully. You can now log in with your new password.';
   goFpPanel(3);
 }
 
 function fpGoToLogin(){
   closeForgotPassword();
+  // Pre-fill email in login form
   setTimeout(()=>{
     openModal('login');
-    if(_fpEmail)document.getElementById('loginEmail').value=_fpEmail;
+    if(_fpEmail) document.getElementById('loginEmail').value=_fpEmail;
   },350);
 }
 
+// ── DASHBOARD ──
 function openDashboard(){
-  const s=getSession();if(!s)return;
-  const row=getUsers()[s.email];
-  if(!row){
-    clearSession();
-    closeDashboard();
-    showToast('','Session could not be restored. Please log in again.');
-    return;
-  }
-  const rem=sessionRemember(s);
-  setSessionRecord(buildSessionPayload(row,{rememberMe:rem}),rem);
-  const user=getSession();
+  const user=getSession();if(!user)return;
   const h=new Date().getHours();
   const g=h<12?'Good morning':h<17?'Good afternoon':'Good evening';
   document.getElementById('dashGreeting').textContent=`${g}, ${user.name} ✦`;
   document.getElementById('dashDate').textContent=new Date().toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
   document.getElementById('sidebarName').textContent=user.name;
-  const ini=user.name.split(/\s+/).filter(Boolean).map(w=>w[0]).join('').slice(0,2).toUpperCase()||'?';
-  const setAv=(id)=>{const e=document.getElementById(id);if(!e)return;e.innerHTML=user.avatar?`<img src="${user.avatar}" alt=""/>`:ini;};
+  const ini=user.name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+  const setAv=(id)=>{const e=document.getElementById(id);if(!e)return;e.innerHTML=user.avatar?`<img src="${user.avatar}" alt="av"/>`:ini;};
   ['sidebarAvatar','profileAvatarLg','settingsAvatarPreview'].forEach(setAv);
   document.getElementById('profileName').textContent=user.name;
   document.getElementById('profileEmail').textContent=user.email;
@@ -1557,52 +1094,35 @@ function openDashboard(){
   document.getElementById('settingsEmail').value=user.email;
   document.getElementById('dashPage').classList.add('active');
   document.getElementById('mainPage').style.display='none';
-  refreshAccountShell();
-  showDashSection('home',document.querySelector('[data-dash-nav="home"]'));
+  showDashSection('home');
 }
 function closeDashboard(){document.getElementById('dashPage').classList.remove('active');document.getElementById('mainPage').style.display='block';}
-
 function showDashSection(name,navEl){
-  document.querySelectorAll('.dash-panel-section').forEach(sec=>sec.classList.remove('active'));
-  const t=document.getElementById('section-'+name);
-  if(t)t.classList.add('active');
-  document.querySelectorAll('.dash-nav-item').forEach(i=>i.classList.remove('active'));
-  if(navEl)navEl.classList.add('active');
-  else{
-    const auto=document.querySelector('[data-dash-nav="'+name+'"]');
-    if(auto)auto.classList.add('active');
-  }
+  document.querySelectorAll('.dash-panel-section').forEach(s=>s.classList.remove('active'));
+  const t=document.getElementById('section-'+name);if(t)t.classList.add('active');
+  if(navEl){document.querySelectorAll('.dash-nav-item').forEach(i=>i.classList.remove('active'));navEl.classList.add('active');}
 }
-
 function handleAvatarUpload(e){
   const file=e.target.files[0];if(!file)return;
   if(file.size>5*1024*1024){alert('Max 5MB.');return;}
   const reader=new FileReader();
   reader.onload=ev=>{
-    const url=ev.target.result;
-    const s=getSession();const users=getUsers();
-    users[s.email].avatar=url;saveUsers(users);
-    const rem=sessionRemember(s);
-    setSessionRecord(buildSessionPayload(users[s.email],{rememberMe:rem}),rem);
-    const tag=`<img src="${url}" alt=""/>`;
-    ['settingsAvatarPreview','sidebarAvatar','profileAvatarLg'].forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML=tag;});
+    const url=ev.target.result;const user=getSession();const users=getUsers();
+    user.avatar=url;users[user.email].avatar=url;saveUsers(users);setSession(user);
+    const tag=`<img src="${url}" alt="av"/>`;
+    ['settingsAvatarPreview','sidebarAvatar','profileAvatarLg'].forEach(id=>{const e=document.getElementById(id);if(e)e.innerHTML=tag;});
   };
   reader.readAsDataURL(file);
 }
 function removeAvatar(){
-  const s=getSession();const users=getUsers();
-  users[s.email].avatar=null;saveUsers(users);
-  const rem=sessionRemember(s);
-  setSessionRecord(buildSessionPayload(users[s.email],{rememberMe:rem}),rem);
-  const ini=s.name.split(/\s+/).filter(Boolean).map(w=>w[0]).join('').slice(0,2).toUpperCase()||'?';
-  ['settingsAvatarPreview','sidebarAvatar','profileAvatarLg'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=ini;});
+  const user=getSession();const users=getUsers();user.avatar=null;users[user.email].avatar=null;
+  saveUsers(users);setSession(user);
+  const ini=user.name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+  ['settingsAvatarPreview','sidebarAvatar','profileAvatarLg'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent=ini;});
 }
 function saveName(){
-  const n=sanitizeName(document.getElementById('settingsName').value);if(!n)return;
-  const s=getSession();const users=getUsers();
-  users[s.email].name=n;saveUsers(users);
-  const rem=sessionRemember(s);
-  setSessionRecord(buildSessionPayload(users[s.email],{rememberMe:rem}),rem);
+  const n=document.getElementById('settingsName').value.trim();if(!n)return;
+  const user=getSession();const users=getUsers();user.name=n;users[user.email].name=n;saveUsers(users);setSession(user);
   const h=new Date().getHours();const g=h<12?'Good morning':h<17?'Good afternoon':'Good evening';
   document.getElementById('dashGreeting').textContent=`${g}, ${n} ✦`;
   document.getElementById('sidebarName').textContent=n;
@@ -1610,26 +1130,26 @@ function saveName(){
   document.getElementById('profileNameRow').textContent=n;
   const msg=document.getElementById('saveNameMsg');msg.style.display='inline-flex';setTimeout(()=>msg.style.display='none',3000);
 }
-async function changePassword(){
-  hideMsg('passChangeMsg');
+function changePassword(){
   const cur=document.getElementById('curPass').value;
   const nw=document.getElementById('newPass').value;
   const conf=document.getElementById('confPass').value;
-  const s=getSession();
-  if(!s)return;
-  const users=getUsers();
-  const row=users[s.email];
-  if(!(await verifyStoredPassword(row,cur)))return showMsg('passChangeMsg','Unable to update password.','error');
-  if(nw.length<8)return showMsg('passChangeMsg','New password must be at least 8 characters.','error');
+  const user=getSession();
+  if(cur!==user.password)return showMsg('passChangeMsg','Current password is incorrect.','error');
+  if(nw.length<6)return showMsg('passChangeMsg','New password must be at least 6 characters.','error');
   if(nw!==conf)return showMsg('passChangeMsg','Passwords do not match.','error');
-  const h=await hashPassword(nw);
-  row.passwordSalt=h.saltB64;row.passwordHash=h.hashB64;delete row.password;
-  saveUsers(users);
-  const rem=sessionRemember(s);
-  setSessionRecord(buildSessionPayload(row,{rememberMe:rem}),rem);
+  const users=getUsers();user.password=nw;users[user.email].password=nw;saveUsers(users);setSession(user);
   ['curPass','newPass','confPass'].forEach(id=>document.getElementById(id).value='');
-  showMsg('passChangeMsg','Password updated.','success');
+  showMsg('passChangeMsg','✓ Password updated successfully.','success');
   setTimeout(()=>hideMsg('passChangeMsg'),4000);
+}
+
+// ── COPY ADDRESS ──
+function copyAddr(id,btn){
+  navigator.clipboard.writeText(document.getElementById(id).textContent).then(()=>{
+    const o=btn.textContent;btn.textContent='✓';btn.style.color='var(--green)';
+    setTimeout(()=>{btn.textContent=o;btn.style.color='';},2000);
+  });
 }
 
 // ── RETURNS CALC ──
@@ -1668,19 +1188,7 @@ setInterval(updatePrices,3000);
 const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:.08});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
-function migrateLegacyUsers(){
-  const users=getUsers();
-  let ch=false;
-  Object.keys(users).forEach(email=>{
-    const u=users[email];
-    if(!u.realAccount){u.realAccount=defaultRealAccount();ch=true;}
-  });
-  if(ch)saveUsers(users);
-}
-
 // Init
-populateWalletAddresses();
-migrateLegacyUsers();
 calcReturns();
 (function(){const s=getSession();if(s)openDashboard();})();
 </script>
